@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="NFL">
+
+        <menu>
+
+            <item
+
+                android:id="@+id/NFL_NEWS"
+                android:title="@string/nfl_sports_news"
+
+            />
+
+            <item
+
+                android:id="@+id/NFL_TEAMS"
+                android:title="@string/nfl_teams"
+
+            />
+
+            <item
+
+                android:id="@+id/NFL_STANDINGS"
+                android:title="@string/nfl_standings"
+
+            />
+
+            <item
+
+                android:id="@+id/NFL_STATS"
+                android:title="@string/nfl_stats"
+
+            />
+
+        </menu>
+
+    </item>
+
+    <item android:title="NBA">
+
+        <menu>
+
+            <item
+
+                android:id="@+id/NBA_NEWS"
+                android:title="@string/nba_sports_news"
+
+            />
+
+            <item
+
+                android:id="@+id/NBA_TEAMS"
+                android:title="@string/nba_teams"
+
+            />
+
+            <item
+
+                android:id="@+id/NBA_STANDINGS"
+                android:title="@string/nba_standings"
+
+            />
+
+            <item
+
+                android:id="@+id/NBA_STATS"
+                android:title="@string/nba_stats"
+
+            />
+
+        </menu>
+
+    </item>
+
+    <item android:title="MLB">
+
+        <menu>
+
+            <item
+
+                android:id="@+id/MLB_NEWS"
+                android:title="@string/mlb_sports_news"
+
+            />
+
+            <item
+
+                android:id="@+id/MLB_TEAMS"
+                android:title="@string/mlb_teams"
+
+            />
+
+            <item
+
+                android:id="@+id/MLB_STANDINGS"
+                android:title="@string/mlb_standings"
+
+            />
+
+            <item
+
+                android:id="@+id/MLB_STATS"
+                android:title="@string/mlb_stats"
+
+            />
+
+        </menu>
+
+    </item>
+
+</menu>

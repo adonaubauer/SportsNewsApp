@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">SportsNewsApp</string>
+    <string name="nfl_sports_news">NEWS</string>
+    <string name="nfl_teams">TEAMS</string>
+    <string name="nfl_standings">STANDINGS</string>
+    <string name="nfl_stats">STATS</string>
+    <string name="nba_sports_news">NEWS</string>
+    <string name="nba_teams">TEAMS</string>
+    <string name="nba_standings">STANDINGS</string>
+    <string name="nba_stats">STATS</string>
+    <string name="mlb_sports_news">NEWS</string>
+    <string name="mlb_teams">TEAMS</string>
+    <string name="mlb_standings">STANDINGS</string>
+    <string name="mlb_stats">STATS</string>
+    <string name="open_navigation_drawer">Open Navigation Drawer</string>
+    <string name="close_navigation_drawer">Close Navigation Drawer</string>
+    <string name="app_settings">App Settings</string>
+    <string name="user_username">User Username</string>
+    <string name="action_websearch">Search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
+    <string-array name="sports_array">
+
+        <item>@string/nfl_sports_news</item>
+        <item>@string/nfl_teams</item>
+        <item>@string/nfl_standings</item>
+        <item>@string/nfl_stats</item>
+        <item>@string/nba_sports_news</item>
+        <item>@string/nba_teams</item>
+        <item>@string/nba_standings</item>
+        <item>@string/nba_stats</item>
+        <item>@string/mlb_sports_news</item>
+        <item>@string/mlb_teams</item>
+        <item>@string/mlb_standings</item>
+        <item>@string/mlb_stats</item>
+
+    </string-array>
+
+</resources>
