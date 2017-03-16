@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">SportsNewsApp</string>
+    <string name="news">NEWS</string>
+    <string name="teams">TEAMS</string>
+    <string name="standings">STANDINGS</string>
+    <string name="stats">STATS</string>
     <string name="nfl_sports_news">NEWS</string>
     <string name="nfl_teams">TEAMS</string>
     <string name="nfl_standings">STANDINGS</string>
@@ -18,6 +22,7 @@
     <string name="user_username">User Username</string>
     <string name="action_websearch">Search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="welcome_message">Welcome to the SportsNews app, please click on the navigation drawer to begin viewing your favorite sports and players</string>
 
     <string-array name="sports_array">
 

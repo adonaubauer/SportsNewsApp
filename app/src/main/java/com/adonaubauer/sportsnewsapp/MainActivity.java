@@ -1,25 +1,18 @@
 package com.adonaubauer.sportsnewsapp;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 /**
  * Created by Austin on 2/25/2017.
@@ -31,9 +24,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
     Toolbar actionBar;
-
-    CharSequence title;
-    String[] sportsTitles;
+    TabLayout tabLayout;
+    TabItem news;
+    TabItem teams;
+    TabItem standings;
+    TabItem stats;
+    int numTabSelected;
+    TextView welcomeMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +52,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.navigation_drawer_view);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+        news = (TabItem) findViewById(R.id.news);
+
+        teams = (TabItem) findViewById(R.id.teams);
+
+        standings = (TabItem) findViewById(R.id.standings);
+
+        stats = (TabItem) findViewById(R.id.stats);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+
+        });
+
+        welcomeMessage = (TextView) findViewById(R.id.welcome_message);
 
     }
 
@@ -94,24 +122,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 return true;
 
-            /*case R.id.action_websearch:
-
-                SearchView searchView = (SearchView) menuItem.getActionView();
-
-                SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-                if (searchManager != null) {
-
-                    searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
-                }
-
-                searchView.setIconifiedByDefault(false);
-
-                return true;
-
-            */
-
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
@@ -130,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.NFL_TEAMS:
@@ -138,13 +150,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.NFL_STATS:
 
                 getSupportActionBar().setTitle(R.string.nfl_stats);
 
+                NflPlayerStatsFragment nflPlayerStatsFragment = new NflPlayerStatsFragment();
+
+                nflPlayerStatsFragment.setArguments(getIntent().getExtras());
+
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflPlayerStatsFragment).commit();
+
                 drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
 
                 return true;
 
@@ -154,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.NBA_NEWS:
@@ -161,6 +185,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportActionBar().setTitle(R.string.nba_sports_news);
 
                 drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
 
                 return true;
 
@@ -170,6 +196,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.NBA_STATS:
@@ -177,6 +205,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportActionBar().setTitle(R.string.nba_stats);
 
                 drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
 
                 return true;
 
@@ -186,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.MLB_NEWS:
@@ -193,6 +225,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportActionBar().setTitle(R.string.mlb_sports_news);
 
                 drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
 
                 return true;
 
@@ -202,6 +236,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.MLB_STATS:
@@ -210,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
+                welcomeMessage.setText("");
+
                 return true;
 
             case R.id.MLB_STANDINGS:
@@ -217,6 +255,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportActionBar().setTitle(R.string.mlb_standings);
 
                 drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
 
                 return true;
 

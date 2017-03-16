@@ -32,6 +32,12 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <include
+
+            layout="@layout/tabs_main"
+
+        />
+
     </android.support.design.widget.AppBarLayout>
 
     <include
