@@ -6,10 +6,10 @@ import android.support.v4.app.ListFragment;
 import android.widget.ArrayAdapter;
 
 /**
- * Created by Austin on 3/15/2017.
+ * Created by Austin on 3/21/2017.
  */
 
-public class NflTeamsFragment extends ListFragment {
+public class NbaTeamsFragment extends ListFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,8 @@ public class NflTeamsFragment extends ListFragment {
 
         int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
 
-        setListAdapter(new ArrayAdapter<String>(getActivity(), layout, getResources().getStringArray(R.array.nfl_team_names)));
+        setListAdapter(new ArrayAdapter<String>(getActivity(), layout, getResources().getStringArray(R.array.nba_team_names)));
+
 
     }
 

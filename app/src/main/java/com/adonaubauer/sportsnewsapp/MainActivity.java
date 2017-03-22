@@ -148,6 +148,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getSupportActionBar().setTitle(R.string.nfl_teams);
 
+                NflTeamsFragment nflTeamsFragment = new NflTeamsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflTeamsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflTeamsFragment).commit();
+
+                }
                 drawerLayout.closeDrawer(GravityCompat.START);
 
                 welcomeMessage.setText("");
@@ -162,7 +173,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 nflPlayerStatsFragment.setArguments(getIntent().getExtras());
 
-                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflPlayerStatsFragment).commit();
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflPlayerStatsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflPlayerStatsFragment).commit();
+
+                }
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -173,6 +192,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.NFL_STANDINGS:
 
                 getSupportActionBar().setTitle(R.string.nfl_standings);
+
+                NflDivisionStandingsFragment nflDivisionStandingsFragment = new NflDivisionStandingsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflDivisionStandingsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflDivisionStandingsFragment).commit();
+
+                }
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -194,6 +225,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getSupportActionBar().setTitle(R.string.nba_teams);
 
+                NbaTeamsFragment nbaTeamsFragment = new NbaTeamsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nbaTeamsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaTeamsFragment).commit();
+
+                }
+
                 drawerLayout.closeDrawer(GravityCompat.START);
 
                 welcomeMessage.setText("");
@@ -204,6 +247,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getSupportActionBar().setTitle(R.string.nba_stats);
 
+                NbaPlayerStatsFragment nbaPlayerStatsFragment = new NbaPlayerStatsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nbaPlayerStatsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaPlayerStatsFragment).commit();
+
+                }
+
                 drawerLayout.closeDrawer(GravityCompat.START);
 
                 welcomeMessage.setText("");
@@ -213,6 +268,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.NBA_STANDINGS:
 
                 getSupportActionBar().setTitle(R.string.nba_standings);
+
+                NbaDivisionStandingsFragment nbaDivisionStandingsFragment = new NbaDivisionStandingsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nbaDivisionStandingsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaDivisionStandingsFragment).commit();
+
+                }
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -234,6 +301,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getSupportActionBar().setTitle(R.string.mlb_teams);
 
+                MlbTeamsFragment mlbTeamsFragment = new MlbTeamsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mlbTeamsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbTeamsFragment).commit();
+
+                }
                 drawerLayout.closeDrawer(GravityCompat.START);
 
                 welcomeMessage.setText("");
@@ -244,6 +322,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 getSupportActionBar().setTitle(R.string.mlb_stats);
 
+                MlbPlayerStatsFragment mlbPlayerStatsFragment = new MlbPlayerStatsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mlbPlayerStatsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbPlayerStatsFragment).commit();
+
+                }
+
                 drawerLayout.closeDrawer(GravityCompat.START);
 
                 welcomeMessage.setText("");
@@ -253,6 +343,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.MLB_STANDINGS:
 
                 getSupportActionBar().setTitle(R.string.mlb_standings);
+
+                MlbDivisionStandingsFragment mlbDivisionStandingsFragment = new MlbDivisionStandingsFragment();
+
+                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mlbDivisionStandingsFragment).commit();
+
+                } else {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbDivisionStandingsFragment).commit();
+
+                }
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
