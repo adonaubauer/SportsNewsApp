@@ -3,7 +3,7 @@
 
     <item
 
-        android:title="NFL"
+        android:title="@string/sports"
 
     >
 
@@ -11,101 +11,22 @@
 
             <item
 
-                android:id="@+id/NFL_NEWS"
-                android:title="@string/news"
+                android:id="@+id/NFL"
+                android:title="@string/nfl"
 
             />
 
             <item
 
-                android:id="@+id/NFL_TEAMS"
-                android:title="@string/teams"
+                android:id="@+id/NBA"
+                android:title="@string/nba"
 
             />
 
             <item
 
-                android:id="@+id/NFL_STANDINGS"
-                android:title="@string/standings"
-
-            />
-
-            <item
-
-                android:id="@+id/NFL_STATS"
-                android:title="@string/stats"
-
-            />
-
-        </menu>
-
-    </item>
-
-    <item android:title="NBA">
-
-        <menu>
-
-            <item
-
-                android:id="@+id/NBA_NEWS"
-                android:title="@string/news"
-
-            />
-
-            <item
-
-                android:id="@+id/NBA_TEAMS"
-                android:title="@string/teams"
-
-            />
-
-            <item
-
-                android:id="@+id/NBA_STANDINGS"
-                android:title="@string/standings"
-
-            />
-
-            <item
-
-                android:id="@+id/NBA_STATS"
-                android:title="@string/stats"
-
-            />
-
-        </menu>
-
-    </item>
-
-    <item android:title="MLB">
-
-        <menu>
-
-            <item
-
-                android:id="@+id/MLB_NEWS"
-                android:title="@string/news"
-
-            />
-
-            <item
-
-                android:id="@+id/MLB_TEAMS"
-                android:title="@string/teams"
-
-            />
-
-            <item
-
-                android:id="@+id/MLB_STANDINGS"
-                android:title="@string/standings"
-
-            />
-
-            <item
-
-                android:id="@+id/MLB_STATS"
-                android:title="@string/stats"
+                android:id="@+id/MLB"
+                android:title="@string/mlb"
 
             />
 

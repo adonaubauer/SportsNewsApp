@@ -52,13 +52,12 @@ public class NflPlayerStatsFragment extends ListFragment {
 
         @Override
         protected void onPostExecute(ArrayList<String> strings) {
+            super.onPostExecute(strings);
 
             int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
                     android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
 
             setListAdapter(new ArrayAdapter<String>(getActivity(), layout, playerStats));
-
-            super.onPostExecute(strings);
         }
 
         @Override

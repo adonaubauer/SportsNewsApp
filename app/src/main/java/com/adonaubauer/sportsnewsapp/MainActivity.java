@@ -2,10 +2,13 @@ package com.adonaubauer.sportsnewsapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,11 +28,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle drawerToggle;
     Toolbar actionBar;
     TabLayout tabLayout;
-    TabItem news;
-    TabItem teams;
-    TabItem standings;
-    TabItem stats;
-    int numTabSelected;
+    ViewPager viewPager;
+    ViewPagerAdapter viewPagerAdapter;
     TextView welcomeMessage;
 
     @Override
@@ -55,18 +55,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
-        news = (TabItem) findViewById(R.id.news);
+        tabLayout.addTab(tabLayout.newTab().setText("TEAMS"));
 
-        teams = (TabItem) findViewById(R.id.teams);
+        tabLayout.addTab(tabLayout.newTab().setText("STANDINGS"));
 
-        standings = (TabItem) findViewById(R.id.standings);
+        tabLayout.addTab(tabLayout.newTab().setText("STATS"));
 
-        stats = (TabItem) findViewById(R.id.stats);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
+
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        viewPager.setAdapter(viewPagerAdapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(final TabLayout.Tab tab) {
+
+                viewPager.setCurrentItem(tab.getPosition());
 
             }
 
@@ -79,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-
         });
 
         welcomeMessage = (TextView) findViewById(R.id.welcome_message);
@@ -134,54 +142,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId()) {
 
-            case R.id.NFL_NEWS:
+            case R.id.NFL:
 
-                getSupportActionBar().setTitle(R.string.nfl_sports_news);
+                viewPager.setCurrentItem(0);
 
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.NFL_TEAMS:
-
-                getSupportActionBar().setTitle(R.string.nfl_teams);
-
-                NflTeamsFragment nflTeamsFragment = new NflTeamsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflTeamsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflTeamsFragment).commit();
-
-                }
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.NFL_STATS:
-
-                getSupportActionBar().setTitle(R.string.nfl_stats);
-
-                NflPlayerStatsFragment nflPlayerStatsFragment = new NflPlayerStatsFragment();
-
-                nflPlayerStatsFragment.setArguments(getIntent().getExtras());
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflPlayerStatsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflPlayerStatsFragment).commit();
-
-                }
+                getSupportActionBar().setTitle(R.string.nfl);
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -189,7 +154,77 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 return true;
 
-            case R.id.NFL_STANDINGS:
+            case R.id.NBA:
+
+                viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+                viewPager.setAdapter(viewPagerAdapter);
+
+                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+                tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+
+                        viewPager.setCurrentItem(tab.getPosition());
+
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
+
+                getSupportActionBar().setTitle(R.string.nba);
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
+
+                return true;
+
+            case R.id.MLB:
+
+                viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+                viewPager.setAdapter(viewPagerAdapter);
+
+                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+                tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+
+                        viewPager.setCurrentItem(tab.getPosition());
+
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
+
+                getSupportActionBar().setTitle(R.string.mlb);
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+                welcomeMessage.setText("");
+
+                return true;
+
+            /*case R.id.NFL_STANDINGS:
 
                 getSupportActionBar().setTitle(R.string.nfl_standings);
 
@@ -361,6 +396,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 welcomeMessage.setText("");
 
                 return true;
+
+                */
+
 
         }
 

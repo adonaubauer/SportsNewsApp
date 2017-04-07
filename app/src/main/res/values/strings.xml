@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">SportsNewsApp</string>
+    <string name="sports">SPORTS</string>
+    <string name="nfl">NFL</string>
+    <string name="nba">NBA</string>
+    <string name="mlb">MLB</string>
     <string name="news">NEWS</string>
     <string name="teams">TEAMS</string>
     <string name="standings">STANDINGS</string>
