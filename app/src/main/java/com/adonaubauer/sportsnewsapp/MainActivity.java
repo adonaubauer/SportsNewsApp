@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar actionBar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    NflViewPagerAdapter nflViewPagerAdapter;
+    NbaViewPagerAdapter nbaViewPagerAdapter;
+    MlbViewPagerAdapter mlbViewPagerAdapter;
     TextView welcomeMessage;
 
     @Override
@@ -65,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         viewPager = (ViewPager) findViewById(R.id.pager);
 
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        nflViewPagerAdapter = new NflViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
-        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setAdapter(nflViewPagerAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -144,7 +146,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.NFL:
 
-                viewPager.setCurrentItem(0);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(0)).commit();
+
+                tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+
+                        if (tab.getPosition() == 0) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(0)).commit();
+
+                        } else if (tab.getPosition() == 1) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(1)).commit();
+
+                        } else if (tab.getPosition() == 2) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(2)).commit();
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
 
                 getSupportActionBar().setTitle(R.string.nfl);
 
@@ -156,17 +189,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.NBA:
 
-                viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+                nbaViewPagerAdapter = new NbaViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
-                viewPager.setAdapter(viewPagerAdapter);
+                viewPager.setAdapter(nbaViewPagerAdapter);
 
                 viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaViewPagerAdapter.getItem(0)).commit();
 
                 tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
 
-                        viewPager.setCurrentItem(tab.getPosition());
+                        if (tab.getPosition() == 0) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaViewPagerAdapter.getItem(0)).commit();
+
+                        } else if (tab.getPosition() == 1) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaViewPagerAdapter.getItem(1)).commit();
+
+                        } else if (tab.getPosition() == 2) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaViewPagerAdapter.getItem(2)).commit();
+
+                        }
 
                     }
 
@@ -191,17 +238,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.MLB:
 
-                viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+                mlbViewPagerAdapter = new MlbViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
-                viewPager.setAdapter(viewPagerAdapter);
+                viewPager.setAdapter(mlbViewPagerAdapter);
 
                 viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbViewPagerAdapter.getItem(0)).commit();
 
                 tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
 
-                        viewPager.setCurrentItem(tab.getPosition());
+                        if (tab.getPosition() == 0) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbViewPagerAdapter.getItem(0)).commit();
+
+                        } else if (tab.getPosition() == 1) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbViewPagerAdapter.getItem(1)).commit();
+
+                        } else if (tab.getPosition() == 2) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbViewPagerAdapter.getItem(2)).commit();
+
+                        }
 
                     }
 

@@ -8,16 +8,18 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  * Created by Austin on 4/7/2017.
  */
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int numberOfTabs;
 
-    public ViewPagerAdapter(FragmentManager fragmentManager, int numberOfTabs) {
+    public NflViewPagerAdapter(FragmentManager fragmentManager, int numberOfTabs) {
         super(fragmentManager);
 
         this.numberOfTabs = numberOfTabs;
 
     }
+
+
 
     @Override
     public Fragment getItem(int position) {

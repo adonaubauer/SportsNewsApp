@@ -3,7 +3,9 @@ package com.adonaubauer.sportsnewsapp;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * Created by Austin on 3/21/2017.
@@ -21,4 +23,11 @@ public class MlbTeamsFragment extends ListFragment {
 
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+
+
+    }
 }
