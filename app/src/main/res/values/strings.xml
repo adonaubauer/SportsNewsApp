@@ -27,6 +27,9 @@
     <string name="action_websearch">Search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="welcome_message">Welcome to the SportsNews app, please click on the navigation drawer to begin viewing your favorite sports and players</string>
+    <string name="team_name">TEAM NAME</string>
+    <string name="division_standings">Division Standings</string>
+    <string name="players">Players</string>
 
     <string-array name="sports_array">
 
