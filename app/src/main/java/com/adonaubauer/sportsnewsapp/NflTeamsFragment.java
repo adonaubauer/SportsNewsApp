@@ -1,9 +1,12 @@
 package com.adonaubauer.sportsnewsapp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * Created by Austin on 3/15/2017.
@@ -21,4 +24,17 @@ public class NflTeamsFragment extends ListFragment {
 
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        String clickedTeam = (String) l.getItemAtPosition(position);
+
+        Intent nflTeamActivity = new Intent(getActivity().getApplicationContext(), TeamActivity.class);
+
+        nflTeamActivity.putExtra("Clicked Team", clickedTeam);
+
+        startActivity(nflTeamActivity);
+
+    }
 }

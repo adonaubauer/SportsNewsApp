@@ -40,7 +40,8 @@
 
         <activity android:name=".MyPreferencesActivity"/>
 
-        <activity android:name=".TeamActivity"/>
+        <activity android:name=".TeamActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 
