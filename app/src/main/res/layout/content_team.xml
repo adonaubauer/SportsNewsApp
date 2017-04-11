@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/team_name"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:id="@+id/teamName"/>
 
     </LinearLayout>
 

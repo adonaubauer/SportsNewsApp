@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Austin on 4/9/2017.
@@ -21,6 +24,7 @@ public class TeamActivity extends AppCompatActivity {
     String[] nflTeamNames;
     String[] nbaTeamNames;
     String[] mlbTeamNames;
+    TextView teamNameTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class TeamActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout_team);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
+
+        teamNameTextView = (TextView) findViewById(R.id.teamName);
 
         setSupportActionBar(toolbar);
 
@@ -56,6 +62,8 @@ public class TeamActivity extends AppCompatActivity {
                 }
 
                 switchToTab(team);
+
+                teamNameTextView.setText(team);
 
             }
 
