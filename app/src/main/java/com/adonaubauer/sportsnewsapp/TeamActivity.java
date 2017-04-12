@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.util.Arrays;
 
 /**
  * Created by Austin on 4/9/2017.
@@ -55,13 +58,53 @@ public class TeamActivity extends AppCompatActivity {
 
             if (clickedTeam.equals(team)) {
 
-                for (String teamName : getResources().getStringArray(R.array.nfl_team_names)) {
+                for (String teamName : nflTeamNames) {
 
                     tabLayout.addTab(tabLayout.newTab().setText(teamName));
 
                 }
 
-                switchToTab(team);
+                switchToTabNfl(team);
+
+                final int clickedTeamIndex = Arrays.asList(nflTeamNames).indexOf(team);
+
+                tabLayout.setScrollPosition(clickedTeamIndex, 0f, true);
+
+                teamNameTextView.setText(team);
+
+            }
+
+        }
+        for (String team : nbaTeamNames) {
+
+            if (clickedTeam.equals(team)) {
+
+                for (String teamName : nbaTeamNames) {
+
+                    tabLayout.addTab(tabLayout.newTab().setText(teamName));
+
+
+
+                }
+
+                switchToTabNba(team);
+
+                teamNameTextView.setText(team);
+
+            }
+
+        }
+        for (String team : mlbTeamNames) {
+
+            if (clickedTeam.equals(team)) {
+
+                for (String teamName : mlbTeamNames) {
+
+                    tabLayout.addTab(tabLayout.newTab().setText(teamName));
+
+                }
+
+                switchToTabMlb(team);
 
                 teamNameTextView.setText(team);
 
@@ -110,7 +153,7 @@ public class TeamActivity extends AppCompatActivity {
 
     }
 
-    public void switchToTab(String tab) {
+    public void switchToTabNfl(String tab) {
 
         if(tab.equals("Arizona Cardinals")){
             viewPager.setCurrentItem(0);
@@ -175,6 +218,142 @@ public class TeamActivity extends AppCompatActivity {
         }else if(tab.equals("Tennessee Titans")){
             viewPager.setCurrentItem(28);
         }else if(tab.equals("Washington Redskins")){
+            viewPager.setCurrentItem(29);
+        }
+
+    }
+
+    public void switchToTabNba(String tab) {
+
+        if(tab.equals("Atlanta Hawks")){
+            viewPager.setCurrentItem(0);
+        }else if(tab.equals("Boston Celtics")){
+            viewPager.setCurrentItem(1);
+        }else if(tab.equals("Brooklyn Nets")){
+            viewPager.setCurrentItem(2);
+        }else if(tab.equals("Charlotte Hornets")){
+            viewPager.setCurrentItem(3);
+        }else if(tab.equals("Chicago Bulls")){
+            viewPager.setCurrentItem(4);
+        }else if(tab.equals("Cleveland Cavaliers")){
+            viewPager.setCurrentItem(5);
+        }else if(tab.equals("Dallas Mavericks")){
+            viewPager.setCurrentItem(6);
+        }else if(tab.equals("Denver Nuggets")){
+            viewPager.setCurrentItem(7);
+        }else if(tab.equals("Detroit Pistons")){
+            viewPager.setCurrentItem(8);
+        }else if(tab.equals("Golden State Warriors")){
+            viewPager.setCurrentItem(9);
+        }else if(tab.equals("Houston Rockets")){
+            viewPager.setCurrentItem(10);
+        }else if(tab.equals("Indiana Pacers")){
+            viewPager.setCurrentItem(11);
+        }else if(tab.equals("Los Angeles Clippers")){
+            viewPager.setCurrentItem(12);
+        }else if(tab.equals("Los Angeles Lakers")){
+            viewPager.setCurrentItem(13);
+        }else if(tab.equals("Memphis Grizzlies")){
+            viewPager.setCurrentItem(14);
+        }else if(tab.equals("Miami Heat")){
+            viewPager.setCurrentItem(15);
+        }else if(tab.equals("Los Angeles Chargers")){
+            viewPager.setCurrentItem(16);
+        }else if(tab.equals("Los Angeles Rams")){
+            viewPager.setCurrentItem(17);
+        }else if(tab.equals("Milwaukee Bucks")){
+            viewPager.setCurrentItem(18);
+        }else if(tab.equals("Minnesota Timberwolves")){
+            viewPager.setCurrentItem(19);
+        }else if(tab.equals("New Orleans Pelicans")){
+            viewPager.setCurrentItem(20);
+        }else if(tab.equals("New York Knicks")){
+            viewPager.setCurrentItem(21);
+        }else if(tab.equals("Oklahoma City Thunder")){
+            viewPager.setCurrentItem(22);
+        }else if(tab.equals("Orlando Magic")){
+            viewPager.setCurrentItem(23);
+        }else if(tab.equals("Philadelphia 76ers")){
+            viewPager.setCurrentItem(24);
+        }else if(tab.equals("Phoenix Suns")){
+            viewPager.setCurrentItem(25);
+        }else if(tab.equals("Portland Trail Blazers")){
+            viewPager.setCurrentItem(26);
+        }else if(tab.equals("Sacramento Kings")){
+            viewPager.setCurrentItem(27);
+        }else if(tab.equals("San Antonio Spurs")){
+            viewPager.setCurrentItem(28);
+        }else if(tab.equals("Toronto Rapters")){
+            viewPager.setCurrentItem(29);
+        }else if(tab.equals("Utah Jazz")){
+            viewPager.setCurrentItem(28);
+        }else if(tab.equals("Washington Wizards")){
+            viewPager.setCurrentItem(29);
+        }
+
+    }
+
+    public void switchToTabMlb(String tab) {
+
+        if(tab.equals("Arizona Diamondbacks")){
+            viewPager.setCurrentItem(0);
+        }else if(tab.equals("Atlanta Braves")){
+            viewPager.setCurrentItem(1);
+        }else if(tab.equals("Baltimore Orioles")){
+            viewPager.setCurrentItem(2);
+        }else if(tab.equals("Boston Red Sox")){
+            viewPager.setCurrentItem(3);
+        }else if(tab.equals("Chicago Cubs")){
+            viewPager.setCurrentItem(4);
+        }else if(tab.equals("Chicago White Sox")){
+            viewPager.setCurrentItem(5);
+        }else if(tab.equals("Cincinnati Reds")){
+            viewPager.setCurrentItem(6);
+        }else if(tab.equals("Cleveland Indians")){
+            viewPager.setCurrentItem(7);
+        }else if(tab.equals("Colorado Rockies")){
+            viewPager.setCurrentItem(8);
+        }else if(tab.equals("Detroit Tigers")){
+            viewPager.setCurrentItem(9);
+        }else if(tab.equals("Houston Astros")){
+            viewPager.setCurrentItem(10);
+        }else if(tab.equals("Kansas City Royals")){
+            viewPager.setCurrentItem(11);
+        }else if(tab.equals("Los Angeles Angels")){
+            viewPager.setCurrentItem(12);
+        }else if(tab.equals("Los Angeles Dodgers")){
+            viewPager.setCurrentItem(13);
+        }else if(tab.equals("Miami Marlins")){
+            viewPager.setCurrentItem(14);
+        }else if(tab.equals("Milwaukee Brewers")){
+            viewPager.setCurrentItem(15);
+        }else if(tab.equals("Minnesota Twins")){
+            viewPager.setCurrentItem(16);
+        }else if(tab.equals("New York Mets")){
+            viewPager.setCurrentItem(17);
+        }else if(tab.equals("New York Yankees")){
+            viewPager.setCurrentItem(18);
+        }else if(tab.equals("Oakland Athletics")){
+            viewPager.setCurrentItem(19);
+        }else if(tab.equals("Philadelphia Phillies")){
+            viewPager.setCurrentItem(20);
+        }else if(tab.equals("Pittsburgh Pirates")){
+            viewPager.setCurrentItem(21);
+        }else if(tab.equals("St. Louis Cardinals")){
+            viewPager.setCurrentItem(22);
+        }else if(tab.equals("San Diego Padres")){
+            viewPager.setCurrentItem(23);
+        }else if(tab.equals("San Francisco Giants")){
+            viewPager.setCurrentItem(24);
+        }else if(tab.equals("Seattle Mariners")){
+            viewPager.setCurrentItem(25);
+        }else if(tab.equals("Tampa Bay Rays")){
+            viewPager.setCurrentItem(26);
+        }else if(tab.equals("Texas Rangers")){
+            viewPager.setCurrentItem(27);
+        }else if(tab.equals("Toronto Blue Jays")){
+            viewPager.setCurrentItem(28);
+        }else if(tab.equals("Washington Nationals")){
             viewPager.setCurrentItem(29);
         }
 

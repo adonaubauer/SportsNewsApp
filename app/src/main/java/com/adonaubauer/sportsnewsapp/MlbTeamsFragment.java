@@ -1,5 +1,6 @@
 package com.adonaubauer.sportsnewsapp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -27,7 +28,14 @@ public class MlbTeamsFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        String clickedTeam = (String) l.getItemAtPosition(position);
 
+        Intent mlbTeamActivity = new Intent(getActivity().getApplicationContext(), TeamActivity.class);
+
+        mlbTeamActivity.putExtra("Clicked Team", clickedTeam);
+
+        startActivity(mlbTeamActivity);
 
     }
+
 }

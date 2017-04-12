@@ -1,9 +1,12 @@
 package com.adonaubauer.sportsnewsapp;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
  * Created by Austin on 3/21/2017.
@@ -19,6 +22,19 @@ public class NbaTeamsFragment extends ListFragment {
 
         setListAdapter(new ArrayAdapter<String>(getActivity(), layout, getResources().getStringArray(R.array.nba_team_names)));
 
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        String clickedTeam = (String) l.getItemAtPosition(position);
+
+        Intent nbaTeamActivity = new Intent(getActivity().getApplicationContext(), TeamActivity.class);
+
+        nbaTeamActivity.putExtra("Clicked Team", clickedTeam);
+
+        startActivity(nbaTeamActivity);
 
     }
 
