@@ -2,7 +2,45 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="General"
-        android:key="general_settings"></PreferenceCategory>
+        android:title="Edit Favorites"
+        android:key="edit_favorites">
+
+        <MultiSelectListPreference
+
+            android:title="Select Favorite Sports"
+            android:entries="@array/sports_names_array"
+            android:entryValues="@array/sports_names_array"
+            android:key="selected_favorite_sports"
+
+        />
+
+        <MultiSelectListPreference
+
+            android:title="Select Favorite NFL Teams"
+            android:key="selected_favorite_nfl_teams"
+            android:entries="@array/nfl_team_names"
+            android:entryValues="@array/nfl_team_names"
+
+        />
+
+        <MultiSelectListPreference
+
+            android:title="Select Favorite NBA Teams"
+            android:key="selected_favorite_nba_teams"
+            android:entries="@array/nba_team_names"
+            android:entryValues="@array/nba_team_names"
+
+        />
+
+        <MultiSelectListPreference
+
+            android:title="Select Favorite MLB Teams"
+            android:key="selected_favorite_mlb_teams"
+            android:entries="@array/mlb_team_names"
+            android:entryValues="@array/mlb_team_names"
+
+        />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

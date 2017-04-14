@@ -31,6 +31,14 @@
     <string name="division_standings">Division Standings</string>
     <string name="players">Players</string>
 
+    <string-array name="sports_names_array">
+
+        <item>@string/nfl</item>
+        <item>@string/nba</item>
+        <item>@string/mlb</item>
+
+    </string-array>
+
     <string-array name="sports_array">
 
         <item>@string/nfl_sports_news</item>

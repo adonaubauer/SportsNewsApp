@@ -1,8 +1,10 @@
 package com.adonaubauer.sportsnewsapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -16,6 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.util.Set;
 
 /**
  * Created by Austin on 2/25/2017.
@@ -95,6 +99,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         welcomeMessage = (TextView) findViewById(R.id.welcome_message);
 
     }
+
+    /*SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+    Set<String> favoriteSportsSelected = sharedPreferences.getStringSet("selected_favorite_sports", null);
+
+    String[] sportsSelected = favoriteSportsSelected.toArray(new String[] {});
+
+            for (String sport : sportsSelected) {
+
+        if (sport.equals("NFL") && sport.equals("NBA") && sport.equals("MLB")) {
+
+            navigationView.getMenu().getItem(R.id.NFL).setVisible(true);
+            navigationView.getMenu().getItem(R.id.NBA).setVisible(false);
+            navigationView.getMenu().getItem(R.id.MLB).setVisible(true);
+
+        }
+
+    }*/
 
     @Override
     public void onBackPressed() {
