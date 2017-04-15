@@ -1,5 +1,7 @@
 package com.adonaubauer.sportsnewsapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,8 +9,13 @@ import android.support.v4.app.ListFragment;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Xml;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -19,6 +26,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Austin on 3/7/2017.
@@ -28,9 +37,9 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     public static final String ns = null;
 
-    ArrayList<String> playerStats;
+    ArrayList<NflPlayerInfo> playerStats;
 
-    String uRL = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/cumulative_player_stats.xml";
+    private static final String uRL = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/cumulative_player_stats.xml";
 
     public NflPlayerStatsFragment() {
 
@@ -48,7 +57,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     }
 
-    private class AsyncTaskNflPlayerStats extends AsyncTask<String, Void, ArrayList<String>> {
+    private class AsyncTaskNflPlayerStats extends AsyncTask<String, Void, ArrayList<NflPlayerInfo>> {
 
         HttpURLConnection httpURLConnection;
 
@@ -58,45 +67,76 @@ public class NflPlayerStatsFragment extends ListFragment {
         }
 
         @Override
-        protected void onPostExecute(ArrayList<String> strings) {
+        protected void onPostExecute(ArrayList<NflPlayerInfo> strings) {
             super.onPostExecute(strings);
 
-            int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
-                    android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
+            /*int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
+                    android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;*/
+            //int layout = R.layout.player_list;
 
-            setListAdapter(new ArrayAdapter<String>(getActivity(), layout, playerStats));
+            setListAdapter(new UsersAdapter(getActivity(), playerStats));
+        }
+
+        public class UsersAdapter extends ArrayAdapter<NflPlayerInfo> {
+
+            Context context;
+            ArrayList<NflPlayerInfo> arraylist;
+
+            public UsersAdapter(Context context, ArrayList<NflPlayerInfo> nflPlayerInfo) {
+                super(context, android.R.layout.simple_list_item_1, nflPlayerInfo);
+
+                this.context = context;
+                this.arraylist = nflPlayerInfo;
+
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                // Get the data item for this position
+                NflPlayerInfo info = getItem(position);
+                // Check if an existing view is being reused, otherwise inflate the view
+
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+
+                if (convertView == null) {
+                    convertView = inflater.inflate(R.layout.player_list, null);
+                }
+                // Lookup view for data population
+                TextView tvPlayerID = (TextView) convertView.findViewById(R.id.playerID);
+                TextView tvPlayerLastName = (TextView) convertView.findViewById(R.id.playerLastName);
+                TextView tvPlayerFirstName = (TextView) convertView.findViewById(R.id.playerFirstName);
+                TextView tvPlayerJerseyNumber = (TextView) convertView.findViewById(R.id.playerJerseyNumber);
+                TextView tvPlayerPosition = (TextView) convertView.findViewById(R.id.playerPosition);
+                // Populate the data into the template view using the data object
+                tvPlayerID.setText(info.playerId);
+                tvPlayerLastName.setText(info.playerLastName);
+                tvPlayerFirstName.setText(info.playerFirstName);
+                tvPlayerJerseyNumber.setText(info.playerJerseyNumber);
+                tvPlayerPosition.setText(info.playerPosition);
+                // Return the completed view to render on screen
+                return convertView;
+            }
         }
 
         @Override
-        protected ArrayList<String> doInBackground(String... params) {
+        protected ArrayList<NflPlayerInfo> doInBackground(String... params) {
             return sendRequest(params[0]);
         }
 
-        private ArrayList<String> sendRequest(String apiUrl) {
+        private ArrayList<NflPlayerInfo> sendRequest(String apiUrl) {
+
+            InputStream stream = null;
+            ArrayList<NflPlayerInfo> nflPlayerInfoStringArrayList = new ArrayList<>();
+            ArrayList<NflPlayerInfo> playerStats = new ArrayList<>();
+
+            StringBuilder playerStatsString = new StringBuilder();
 
             try {
 
-                String username = "adonaubauer";
+                stream = downloadUrl(apiUrl);
+                playerStats = parse(stream);
 
-                String password = "Mustang95";
-
-                URL url = new URL(apiUrl);
-
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-
-                httpURLConnection.setRequestMethod("GET");
-
-                httpURLConnection.setRequestProperty("Authorization", "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
-
-                httpURLConnection.setDoOutput(false);
-
-                httpURLConnection.connect();
-
-                Log.d("Response Code",  String.valueOf(httpURLConnection.getResponseCode()));
-
-                InputStream inputStream = httpURLConnection.getInputStream();
-
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                /*BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
                 String line;
 
@@ -104,7 +144,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
                     playerStats.add(line);
 
-                }
+                }*/
 
             } catch (Exception e) {
 
@@ -122,13 +162,51 @@ public class NflPlayerStatsFragment extends ListFragment {
 
             }
 
+            for (NflPlayerInfo nflPlayerInfo : playerStats) {
+
+                playerStatsString.append(nflPlayerInfo.playerId).append(" ").append(nflPlayerInfo.playerLastName).append(" ").append(nflPlayerInfo.playerFirstName).append(" ").append(nflPlayerInfo.playerJerseyNumber).append(" ").append(nflPlayerInfo.playerPosition);
+
+                nflPlayerInfoStringArrayList.add(nflPlayerInfo);
+
+            }
+
+            Log.d("playerstatsstring", playerStatsString.toString());
+
+            Log.d("playerstatsarraylist", playerStats.toString());
+
             return playerStats;
+
+        }
+
+        private InputStream downloadUrl(String stringUrl) throws IOException {
+
+            String username = "adonaubauer";
+
+            String password = "Mustang95";
+
+            URL url = new URL(stringUrl);
+
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+
+            httpURLConnection.setRequestMethod("GET");
+
+            httpURLConnection.setRequestProperty("Authorization", "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+
+            httpURLConnection.setDoOutput(false);
+
+            httpURLConnection.connect();
+
+            Log.d("Response Code",  String.valueOf(httpURLConnection.getResponseCode()));
+
+            InputStream inputStream = httpURLConnection.getInputStream();
+
+            return inputStream;
 
         }
 
     }
 
-    public static class NflPlayerInfo {
+    private static class NflPlayerInfo {
 
         String playerId;
         String playerLastName;
@@ -148,9 +226,124 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     }
 
+    public ArrayList<NflPlayerInfo> parse(InputStream in) throws XmlPullParserException, IOException {
+
+        try {
+
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(in, null);
+            parser.nextTag();
+            return readFeed(parser);
+
+        } finally {
+
+            in.close();
+
+        }
+
+    }
+
+    private ArrayList<NflPlayerInfo> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
+
+        ArrayList<NflPlayerInfo> entries = new ArrayList<>();
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:cumulativeplayerstats");
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+
+            String name = parser.getName();
+
+            if (name.equals("cum:lastUpdatedOn")) {
+
+                skip(parser);
+
+            } else if (name.equals("cum:playerstatsentry")) {
+
+                entries.add(readEntry(parser));
+
+            } else {
+
+                skip(parser);
+
+            }
+
+        }
+
+        return entries;
+
+    }
+
     private NflPlayerInfo readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
 
-        parser.require(XmlPullParser.START_TAG, ns, "player");
+        NflPlayerInfo nflPlayerInfo = null;
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:playerstatsentry");
+        /*String playerId = null;
+        String playerLastName = null;
+        String playerFirstName = null;
+        String playerJerseyNumber = null;
+        String playerPosition = null;*/
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+
+            String name = parser.getName(); //cum:player
+
+            if (name.equals("cum:player")) {
+
+                nflPlayerInfo = readPlayerInfo(parser);
+
+                //return nflPlayerInfo;
+
+            } else {
+
+                skip(parser);
+
+            }
+
+            /*if (name.equals("cum:ID")) {
+
+                playerId = readPlayerId(parser);
+
+            } else if (name.equals("cum:LastName")) {
+
+                playerLastName = readPlayerLastName(parser);
+
+            } else if (name.equals("cum:FirstName")) {
+
+                playerFirstName = readPlayerFirstName(parser);
+
+            } else if (name.equals("cum:JerseyNumber")) {
+
+                playerJerseyNumber = readPlayerJerseyNumber(parser);
+
+            } else if (name.equals("cum:Position")) {
+
+                playerPosition = readPlayerPosition(parser);
+
+            } else {
+
+                skip(parser);
+
+            }
+            */
+
+        }
+
+        return nflPlayerInfo;
+
+    }
+
+    private NflPlayerInfo readPlayerInfo(XmlPullParser parser) throws XmlPullParserException, IOException {
+
         String playerId = null;
         String playerLastName = null;
         String playerFirstName = null;
@@ -163,25 +356,25 @@ public class NflPlayerStatsFragment extends ListFragment {
                 continue;
             }
 
-            String name = parser.getName();
+            String name = parser.getName(); //cum:id
 
-            if (name.equals("ID")) {
+            if (name.equals("cum:ID")) {
 
                 playerId = readPlayerId(parser);
 
-            } else if (name.equals("LastName")) {
+            } else if (name.equals("cum:LastName")) {
 
                 playerLastName = readPlayerLastName(parser);
 
-            } else if (name.equals("FirstName")) {
+            } else if (name.equals("cum:FirstName")) {
 
                 playerFirstName = readPlayerFirstName(parser);
 
-            } else if (name.equals("JerseyNumber")) {
+            } else if (name.equals("cum:JerseyNumber")) {
 
                 playerJerseyNumber = readPlayerJerseyNumber(parser);
 
-            } else if (name.equals("Position")) {
+            } else if (name.equals("cum:Position")) {
 
                 playerPosition = readPlayerPosition(parser);
 
@@ -199,45 +392,45 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     private String readPlayerId(XmlPullParser parser) throws IOException, XmlPullParserException {
 
-        parser.require(XmlPullParser.START_TAG, ns, "ID");
+        parser.require(XmlPullParser.START_TAG, ns, "cum:ID");
         String playerId = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "ID");
+        parser.require(XmlPullParser.END_TAG, ns, "cum:ID");
         return playerId;
 
     }
 
     private String readPlayerLastName(XmlPullParser parser) throws IOException, XmlPullParserException {
 
-        parser.require(XmlPullParser.START_TAG, ns, "LastName");
+        parser.require(XmlPullParser.START_TAG, ns, "cum:LastName");
         String playerLastName = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "LastName");
+        parser.require(XmlPullParser.END_TAG, ns, "cum:LastName");
         return playerLastName;
 
     }
 
     private String readPlayerFirstName(XmlPullParser parser) throws IOException, XmlPullParserException {
 
-        parser.require(XmlPullParser.START_TAG, ns, "FirstName");
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FirstName");
         String playerFirstName = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "FirstName");
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FirstName");
         return playerFirstName;
 
     }
 
     private String readPlayerJerseyNumber(XmlPullParser parser) throws IOException, XmlPullParserException {
 
-        parser.require(XmlPullParser.START_TAG, ns, "JerseyNumber");
+        parser.require(XmlPullParser.START_TAG, ns, "cum:JerseyNumber");
         String playerJerseyNumber = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "JerseyNumber");
+        parser.require(XmlPullParser.END_TAG, ns, "cum:JerseyNumber");
         return playerJerseyNumber;
 
     }
 
     private String readPlayerPosition(XmlPullParser parser) throws IOException, XmlPullParserException {
 
-        parser.require(XmlPullParser.START_TAG, ns, "Position");
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Position");
         String playerPosition = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "Position");
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Position");
         return playerPosition;
 
     }
