@@ -833,6 +833,141 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     }
 
+    private String readPlayerPassingPercentage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassPct");
+        String playerPassPercentage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassPct");
+        return playerPassPercentage;
+
+    }
+
+    private String readPlayerPassingYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassYards");
+        String playerPassingYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassYards");
+        return playerPassingYards;
+
+    }
+
+    private String readPlayerPassingAverage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassAvg");
+        String playerPassingAverage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassAvg");
+        return playerPassingAverage;
+
+    }
+
+    private String readPlayerPassingYardsPerAttempt(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassYardsPerAtt");
+        String playerPassingYardsPerAttempt = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassYardsPerAtt");
+        return playerPassingYardsPerAttempt;
+
+    }
+
+    private String readPlayerPassingTouchdowns(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassTD");
+        String playerPassingTouchdowns = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassTD");
+        return playerPassingTouchdowns;
+
+    }
+
+    private String readPlayerPassingTouchdownPercentage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassTDPct");
+        String playerPassingTouchdownPercentage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassTDPct");
+        return playerPassingTouchdownPercentage;
+
+    }
+
+    private String readPlayerPassingInterceptions(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassInt");
+        String playerPassingInterceptions = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassInt");
+        return playerPassingInterceptions;
+
+    }
+
+    private String readPlayerPassingInterceptionPercentage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassIntPct");
+        String playerPassingInterceptionPercentage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassIntPct");
+        return playerPassingInterceptionPercentage;
+
+    }
+
+    private String readPlayerPassingLong(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassLng");
+        String playerPassingLong = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassLng");
+        return playerPassingLong;
+
+    }
+
+    private String readPlayerPassing20Plus(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Pass20Plus");
+        String playerPassing20Plus = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Pass20Plus");
+        return playerPassing20Plus;
+
+    }
+
+    private String readPlayerPassing40Plus(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Pass40Plus");
+        String playerPassing40Plus = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Pass40Plus");
+        return playerPassing40Plus;
+
+    }
+
+    private String readPlayerPassingSacks(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassSacks");
+        String playerPassingSacks = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassSacks");
+        return playerPassingSacks;
+
+    }
+
+    private String readPlayerPassingSacksYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassSackY");
+        String playerPassingSacksYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassSackY");
+        return playerPassingSacksYards;
+
+    }
+
+    private String readPlayerQBRating(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:QBRating");
+        String playerQBRating = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:QBRating");
+        return playerQBRating;
+
+    }
+
+    private String readPlayerRushingAttempts(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:RushAttempts");
+        String playerRushingAttempts = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:RushAttempts");
+        return playerRushingAttempts;
+
+    }
+
     private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
 
         String result = "";
