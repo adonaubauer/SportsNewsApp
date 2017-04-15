@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -38,6 +39,8 @@ public class NflPlayerStatsFragment extends ListFragment {
     public static final String ns = null;
 
     ArrayList<NflPlayerInfo> playerStats;
+
+    ListView listView;
 
     private static final String uRL = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/cumulative_player_stats.xml";
 
@@ -70,52 +73,10 @@ public class NflPlayerStatsFragment extends ListFragment {
         protected void onPostExecute(ArrayList<NflPlayerInfo> strings) {
             super.onPostExecute(strings);
 
-            /*int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
-                    android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;*/
-            //int layout = R.layout.player_list;
+            int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
+                    android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
 
-            setListAdapter(new UsersAdapter(getActivity(), playerStats));
-        }
-
-        public class UsersAdapter extends ArrayAdapter<NflPlayerInfo> {
-
-            Context context;
-            ArrayList<NflPlayerInfo> arraylist;
-
-            public UsersAdapter(Context context, ArrayList<NflPlayerInfo> nflPlayerInfo) {
-                super(context, android.R.layout.simple_list_item_1, nflPlayerInfo);
-
-                this.context = context;
-                this.arraylist = nflPlayerInfo;
-
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                // Get the data item for this position
-                NflPlayerInfo info = getItem(position);
-                // Check if an existing view is being reused, otherwise inflate the view
-
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-
-                if (convertView == null) {
-                    convertView = inflater.inflate(R.layout.player_list, null);
-                }
-                // Lookup view for data population
-                TextView tvPlayerID = (TextView) convertView.findViewById(R.id.playerID);
-                TextView tvPlayerLastName = (TextView) convertView.findViewById(R.id.playerLastName);
-                TextView tvPlayerFirstName = (TextView) convertView.findViewById(R.id.playerFirstName);
-                TextView tvPlayerJerseyNumber = (TextView) convertView.findViewById(R.id.playerJerseyNumber);
-                TextView tvPlayerPosition = (TextView) convertView.findViewById(R.id.playerPosition);
-                // Populate the data into the template view using the data object
-                tvPlayerID.setText(info.playerId);
-                tvPlayerLastName.setText(info.playerLastName);
-                tvPlayerFirstName.setText(info.playerFirstName);
-                tvPlayerJerseyNumber.setText(info.playerJerseyNumber);
-                tvPlayerPosition.setText(info.playerPosition);
-                // Return the completed view to render on screen
-                return convertView;
-            }
+            setListAdapter(new ArrayAdapter<>(getContext(),layout, strings));
         }
 
         @Override
@@ -125,26 +86,13 @@ public class NflPlayerStatsFragment extends ListFragment {
 
         private ArrayList<NflPlayerInfo> sendRequest(String apiUrl) {
 
-            InputStream stream = null;
-            ArrayList<NflPlayerInfo> nflPlayerInfoStringArrayList = new ArrayList<>();
+            InputStream stream;
             ArrayList<NflPlayerInfo> playerStats = new ArrayList<>();
-
-            StringBuilder playerStatsString = new StringBuilder();
 
             try {
 
                 stream = downloadUrl(apiUrl);
                 playerStats = parse(stream);
-
-                /*BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-
-                while ((line = bufferedReader.readLine()) != null) {
-
-                    playerStats.add(line);
-
-                }*/
 
             } catch (Exception e) {
 
@@ -161,18 +109,6 @@ public class NflPlayerStatsFragment extends ListFragment {
                 }
 
             }
-
-            for (NflPlayerInfo nflPlayerInfo : playerStats) {
-
-                playerStatsString.append(nflPlayerInfo.playerId).append(" ").append(nflPlayerInfo.playerLastName).append(" ").append(nflPlayerInfo.playerFirstName).append(" ").append(nflPlayerInfo.playerJerseyNumber).append(" ").append(nflPlayerInfo.playerPosition);
-
-                nflPlayerInfoStringArrayList.add(nflPlayerInfo);
-
-            }
-
-            Log.d("playerstatsstring", playerStatsString.toString());
-
-            Log.d("playerstatsarraylist", playerStats.toString());
 
             return playerStats;
 
@@ -196,8 +132,6 @@ public class NflPlayerStatsFragment extends ListFragment {
 
             httpURLConnection.connect();
 
-            Log.d("Response Code",  String.valueOf(httpURLConnection.getResponseCode()));
-
             InputStream inputStream = httpURLConnection.getInputStream();
 
             return inputStream;
@@ -208,19 +142,483 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     private static class NflPlayerInfo {
 
-        String playerId;
         String playerLastName;
         String playerFirstName;
-        String playerJerseyNumber;
         String playerPosition;
+        String teamCity;
+        String teamName;
+        String playerGamesPlayed;
+        String playerPassingAttempts;
+        String playerPassingCompletions;
+        String playerPassingPercentage;
+        String playerPassingYards;
+        String playerPassingAverage;
+        String playerPassingYardsPerAttempt;
+        String playerPassingTouchdowns;
+        String playerPassingTouchdownPercentage;
+        String playerPassingInterceptions;
+        String playerPassingInterceptionPercentage;
+        String playerPassingLong;
+        String playerPassing20Plus;
+        String playerPassing40Plus;
+        String playerPassingSacks;
+        String playerPassingSackYards;
+        String playerQBRating;
+        String playerRushingAttempts;
+        String playerRushingYards;
+        String playerRushingAverage;
+        String playerRushingTouchdowns;
+        String playerRushingLong;
+        String playerRushing20Plus;
+        String playerRushing40Plus;
+        String playerRushingFumbles;
+        String playerTargets;
+        String playerReceptions;
+        String playerReceivingYards;
+        String playerReceivingAverage;
+        String playerReceivingTouchdowns;
+        String playerReceivingLong;
+        String playerReceiving20Plus;
+        String playerReceiving40Plus;
+        String playerReceivingFumbles;
+        String playerTacklesSolo;
+        String playerTacklesTotal;
+        String playerTacklesAssist;
+        String playerSacks;
+        String playerSackYards;
+        String playerSafeties;
+        String playerTacklesForLoss;
+        String playerInterceptions;
+        String playerInterceptionYards;
+        String playerInterceptionAverage;
+        String playerInterceptionLong;
+        String playerPassesDefended;
+        String playerStuffs;
+        String playerStuffYards;
+        String playerKB;
+        String playerFumbles;
+        String playerFumblesLost;
+        String playerFumblesForced;
+        String playerFumblesOwnReceived;
+        String playerFumblesOppReceived;
+        String playerFumblesReceivingYards;
+        String playerFumbleTouchdowns;
+        String playerKickReturn;
+        String playerKickReturnYards;
+        String playerKickReturnAverage;
+        String playerKickReturnLong;
+        String playerKickReturnTouchdowns;
+        String playerKickReturn20Plus;
+        String playerKickReturn40Plus;
+        String playerKickReturnFC;
+        String playerKickReturnFumbles;
+        String playerPuntReturn;
+        String playerPuntReturnYards;
+        String playerPuntReturnAverage;
+        String playerPuntReturnLong;
+        String playerPuntReturnTouchdowns;
+        String playerPuntReturn20Plus;
+        String playerPuntReturn40Plus;
+        String playerPuntReturnFC;
+        String playerPuntReturnFumbles;
+        String playerTwoPointAttempts;
+        String playerTwoPointMakes;
+        String playerTwoPointPassAttempts;
+        String playerTwoPointPassMakes;
+        String playerTwoPointPassReceived;
+        String playerTwoPointRushAttempts;
+        String playerTwoPointRushMakes;
 
-        private NflPlayerInfo(String playerId, String playerLastName, String playerFirstName, String playerJerseyNumber, String playerPosition) {
+        private NflPlayerInfo(String playerLastName, String playerFirstName, String playerPosition) {
 
-            this.playerId = playerId;
             this.playerLastName = playerLastName;
             this.playerFirstName = playerFirstName;
-            this.playerJerseyNumber = playerJerseyNumber;
             this.playerPosition = playerPosition;
+
+        }
+
+        public void setTeamCity(String teamCity) {
+
+            this.teamCity = teamCity;
+
+        }
+
+        public void setTeamName(String teamName) {
+
+            this.teamName = teamName;
+
+        }
+
+        public void setPlayerLastName(String playerLastName) {
+            this.playerLastName = playerLastName;
+        }
+
+        public void setPlayerFirstName(String playerFirstName) {
+            this.playerFirstName = playerFirstName;
+        }
+
+        public void setPlayerPosition(String playerPosition) {
+            this.playerPosition = playerPosition;
+        }
+
+        public void setPlayerGamesPlayed(String playerGamesPlayed) {
+            this.playerGamesPlayed = playerGamesPlayed;
+        }
+
+        public void setPlayerPassingAttempts(String playerPassingAttempts) {
+            this.playerPassingAttempts = playerPassingAttempts;
+        }
+
+        public void setPlayerPassingCompletions(String playerPassingCompletions) {
+            this.playerPassingCompletions = playerPassingCompletions;
+        }
+
+        public void setPlayerPassingPercentage(String playerPassingPercentage) {
+            this.playerPassingPercentage = playerPassingPercentage;
+        }
+
+        public void setPlayerPassingYards(String playerPassingYards) {
+            this.playerPassingYards = playerPassingYards;
+        }
+
+        public void setPlayerPassingAverage(String playerPassingAverage) {
+            this.playerPassingAverage = playerPassingAverage;
+        }
+
+        public void setPlayerPassingYardsPerAttempt(String playerPassingYardsPerAttempt) {
+            this.playerPassingYardsPerAttempt = playerPassingYardsPerAttempt;
+        }
+
+        public void setPlayerPassingTouchdowns(String playerPassingTouchdowns) {
+            this.playerPassingTouchdowns = playerPassingTouchdowns;
+        }
+
+        public void setPlayerPassingTouchdownPercentage(String playerPassingTouchdownPercentage) {
+            this.playerPassingTouchdownPercentage = playerPassingTouchdownPercentage;
+        }
+
+        public void setPlayerPassingInterceptions(String playerPassingInterceptions) {
+            this.playerPassingInterceptions = playerPassingInterceptions;
+        }
+
+        public void setPlayerPassingInterceptionPercentage(String playerPassingInterceptionPercentage) {
+            this.playerPassingInterceptionPercentage = playerPassingInterceptionPercentage;
+        }
+
+        public void setPlayerPassingLong(String playerPassingLong) {
+            this.playerPassingLong = playerPassingLong;
+        }
+
+        public void setPlayerPassing20Plus(String playerPassing20Plus) {
+            this.playerPassing20Plus = playerPassing20Plus;
+        }
+
+        public void setPlayerPassing40Plus(String playerPassing40Plus) {
+            this.playerPassing40Plus = playerPassing40Plus;
+        }
+
+        public void setPlayerPassingSacks(String playerPassingSacks) {
+            this.playerPassingSacks = playerPassingSacks;
+        }
+
+        public void setPlayerPassingSackYards(String playerPassingSackYards) {
+            this.playerPassingSackYards = playerPassingSackYards;
+        }
+
+        public void setPlayerQBRating(String playerQBRating) {
+            this.playerQBRating = playerQBRating;
+        }
+
+        public void setPlayerRushingAttempts(String playerRushingAttempts) {
+            this.playerRushingAttempts = playerRushingAttempts;
+        }
+
+        public void setPlayerRushingYards(String playerRushingYards) {
+            this.playerRushingYards = playerRushingYards;
+        }
+
+        public void setPlayerRushingAverage(String playerRushingAverage) {
+            this.playerRushingAverage = playerRushingAverage;
+        }
+
+        public void setPlayerRushingTouchdowns(String playerRushingTouchdowns) {
+            this.playerRushingTouchdowns = playerRushingTouchdowns;
+        }
+
+        public void setPlayerRushingLong(String playerRushingLong) {
+            this.playerRushingLong = playerRushingLong;
+        }
+
+        public void setPlayerRushing20Plus(String playerRushing20Plus) {
+            this.playerRushing20Plus = playerRushing20Plus;
+        }
+
+        public void setPlayerRushing40Plus(String playerRushing40Plus) {
+            this.playerRushing40Plus = playerRushing40Plus;
+        }
+
+        public void setPlayerRushingFumbles(String playerRushingFumbles) {
+            this.playerRushingFumbles = playerRushingFumbles;
+        }
+
+        public void setPlayerTargets(String playerTargets) {
+            this.playerTargets = playerTargets;
+        }
+
+        public void setPlayerReceptions(String playerReceptions) {
+            this.playerReceptions = playerReceptions;
+        }
+
+        public void setPlayerReceivingYards(String playerReceivingYards) {
+            this.playerReceivingYards = playerReceivingYards;
+        }
+
+        public void setPlayerReceivingAverage(String playerReceivingAverage) {
+            this.playerReceivingAverage = playerReceivingAverage;
+        }
+
+        public void setPlayerReceivingTouchdowns(String playerReceivingTouchdowns) {
+            this.playerReceivingTouchdowns = playerReceivingTouchdowns;
+        }
+
+        public void setPlayerReceivingLong(String playerReceivingLong) {
+            this.playerReceivingLong = playerReceivingLong;
+        }
+
+        public void setPlayerReceiving20Plus(String playerReceiving20Plus) {
+            this.playerReceiving20Plus = playerReceiving20Plus;
+        }
+
+        public void setPlayerReceiving40Plus(String playerReceiving40Plus) {
+            this.playerReceiving40Plus = playerReceiving40Plus;
+        }
+
+        public void setPlayerReceivingFumbles(String playerReceivingFumbles) {
+            this.playerReceivingFumbles = playerReceivingFumbles;
+        }
+
+        public void setPlayerTacklesSolo(String playerTacklesSolo) {
+            this.playerTacklesSolo = playerTacklesSolo;
+        }
+
+        public void setPlayerTacklesTotal(String playerTacklesTotal) {
+            this.playerTacklesTotal = playerTacklesTotal;
+        }
+
+        public void setPlayerTacklesAssist(String playerTacklesAssist) {
+            this.playerTacklesAssist = playerTacklesAssist;
+        }
+
+        public void setPlayerSacks(String playerSacks) {
+            this.playerSacks = playerSacks;
+        }
+
+        public void setPlayerSackYards(String playerSackYards) {
+            this.playerSackYards = playerSackYards;
+        }
+
+        public void setPlayerSafeties(String playerSafeties) {
+            this.playerSafeties = playerSafeties;
+        }
+
+        public void setPlayerTacklesForLoss(String playerTacklesForLoss) {
+            this.playerTacklesForLoss = playerTacklesForLoss;
+        }
+
+        public void setPlayerInterceptions(String playerInterceptions) {
+            this.playerInterceptions = playerInterceptions;
+        }
+
+        public void setPlayerInterceptionYards(String playerInterceptionYards) {
+            this.playerInterceptionYards = playerInterceptionYards;
+        }
+
+        public void setPlayerInterceptionAverage(String playerInterceptionAverage) {
+            this.playerInterceptionAverage = playerInterceptionAverage;
+        }
+
+        public void setPlayerInterceptionLong(String playerInterceptionLong) {
+            this.playerInterceptionLong = playerInterceptionLong;
+        }
+
+        public void setPlayerPassesDefended(String playerPassesDefended) {
+            this.playerPassesDefended = playerPassesDefended;
+        }
+
+        public void setPlayerStuffs(String playerStuffs) {
+            this.playerStuffs = playerStuffs;
+        }
+
+        public void setPlayerStuffYards(String playerStuffYards) {
+            this.playerStuffYards = playerStuffYards;
+        }
+
+        public void setPlayerKB(String playerKB) {
+            this.playerKB = playerKB;
+        }
+
+        public void setPlayerFumbles(String playerFumbles) {
+            this.playerFumbles = playerFumbles;
+        }
+
+        public void setPlayerFumblesLost(String playerFumblesLost) {
+            this.playerFumblesLost = playerFumblesLost;
+        }
+
+        public void setPlayerFumblesForced(String playerFumblesForced) {
+            this.playerFumblesForced = playerFumblesForced;
+        }
+
+        public void setPlayerFumblesOwnReceived(String playerFumblesOwnReceived) {
+            this.playerFumblesOwnReceived = playerFumblesOwnReceived;
+        }
+
+        public void setPlayerFumblesOppReceived(String playerFumblesOppReceived) {
+            this.playerFumblesOppReceived = playerFumblesOppReceived;
+        }
+
+        public void setPlayerFumblesReceivingYards(String playerFumblesReceivingYards) {
+            this.playerFumblesReceivingYards = playerFumblesReceivingYards;
+        }
+
+        public void setPlayerFumbleTouchdowns(String playerFumbleTouchdowns) {
+            this.playerFumbleTouchdowns = playerFumbleTouchdowns;
+        }
+
+        public void setPlayerKickReturn(String playerKickReturn) {
+            this.playerKickReturn = playerKickReturn;
+        }
+
+        public void setPlayerKickReturnYards(String playerKickReturnYards) {
+            this.playerKickReturnYards = playerKickReturnYards;
+        }
+
+        public void setPlayerKickReturnAverage(String playerKickReturnAverage) {
+            this.playerKickReturnAverage = playerKickReturnAverage;
+        }
+
+        public void setPlayerKickReturnLong(String playerKickReturnLong) {
+            this.playerKickReturnLong = playerKickReturnLong;
+        }
+
+        public void setPlayerKickReturnTouchdowns(String playerKickReturnTouchdowns) {
+            this.playerKickReturnTouchdowns = playerKickReturnTouchdowns;
+        }
+
+        public void setPlayerKickReturn20Plus(String playerKickReturn20Plus) {
+            this.playerKickReturn20Plus = playerKickReturn20Plus;
+        }
+
+        public void setPlayerKickReturn40Plus(String playerKickReturn40Plus) {
+            this.playerKickReturn40Plus = playerKickReturn40Plus;
+        }
+
+        public void setPlayerKickReturnFC(String playerKickReturnFC) {
+            this.playerKickReturnFC = playerKickReturnFC;
+        }
+
+        public void setPlayerKickReturnFumbles(String playerKickReturnFumbles) {
+            this.playerKickReturnFumbles = playerKickReturnFumbles;
+        }
+
+        public void setPlayerPuntReturn(String playerPuntReturn) {
+            this.playerPuntReturn = playerPuntReturn;
+        }
+
+        public void setPlayerPuntReturnYards(String playerPuntReturnYards) {
+            this.playerPuntReturnYards = playerPuntReturnYards;
+        }
+
+        public void setPlayerPuntReturnAverage(String playerPuntReturnAverage) {
+            this.playerPuntReturnAverage = playerPuntReturnAverage;
+        }
+
+        public void setPlayerPuntReturnLong(String playerPuntReturnLong) {
+            this.playerPuntReturnLong = playerPuntReturnLong;
+        }
+
+        public void setPlayerPuntReturnTouchdowns(String playerPuntReturnTouchdowns) {
+            this.playerPuntReturnTouchdowns = playerPuntReturnTouchdowns;
+        }
+
+        public void setPlayerPuntReturn20Plus(String playerPuntReturn20Plus) {
+            this.playerPuntReturn20Plus = playerPuntReturn20Plus;
+        }
+
+        public void setPlayerPuntReturn40Plus(String playerPuntReturn40Plus) {
+            this.playerPuntReturn40Plus = playerPuntReturn40Plus;
+        }
+
+        public void setPlayerPuntReturnFC(String playerPuntReturnFC) {
+            this.playerPuntReturnFC = playerPuntReturnFC;
+        }
+
+        public void setPlayerPuntReturnFumbles(String playerPuntReturnFumbles) {
+            this.playerPuntReturnFumbles = playerPuntReturnFumbles;
+        }
+
+        public void setPlayerTwoPointAttempts(String playerTwoPointAttempts) {
+            this.playerTwoPointAttempts = playerTwoPointAttempts;
+        }
+
+        public void setPlayerTwoPointMakes(String playerTwoPointMakes) {
+            this.playerTwoPointMakes = playerTwoPointMakes;
+        }
+
+        public void setPlayerTwoPointPassAttempts(String playerTwoPointPassAttempts) {
+            this.playerTwoPointPassAttempts = playerTwoPointPassAttempts;
+        }
+
+        public void setPlayerTwoPointPassMakes(String playerTwoPointPassMakes) {
+            this.playerTwoPointPassMakes = playerTwoPointPassMakes;
+        }
+
+        public void setPlayerTwoPointPassReceived(String playerTwoPointPassReceived) {
+            this.playerTwoPointPassReceived = playerTwoPointPassReceived;
+        }
+
+        public void setPlayerTwoPointRushAttempts(String playerTwoPointRushAttempts) {
+            this.playerTwoPointRushAttempts = playerTwoPointRushAttempts;
+        }
+
+        public void setPlayerTwoPointRushMakes(String playerTwoPointRushMakes) {
+            this.playerTwoPointRushMakes = playerTwoPointRushMakes;
+        }
+
+        public String toString() {
+
+            String nflPlayerInfoToString = playerLastName + " " + playerFirstName + " " + playerPosition
+                    + " " + teamCity + " " + teamName + " " + playerGamesPlayed + " " + playerPassingAttempts
+                    + " " + playerPassingCompletions + " " + playerPassingPercentage
+                    + " " + playerPassingYards + " " + playerPassingAverage + " " + playerPassingYardsPerAttempt
+                    + " " + playerPassingTouchdowns + " " + playerPassingTouchdownPercentage
+                    + " " + playerPassingInterceptions + " " + playerPassingInterceptionPercentage
+                    + " " + playerPassingLong + " " + playerPassing20Plus + " " + playerPassing40Plus
+                    + " " + playerPassingSacks + " " + playerQBRating + " " + playerRushingAttempts
+                    + " " + playerRushingYards + " " + playerRushingAverage + " " + playerRushingTouchdowns
+                    + " " + playerRushingLong + " " + playerRushing20Plus + " " + playerRushing40Plus
+                    + " " + playerRushingFumbles + " " + playerTargets + " " + playerReceptions
+                    + " " + playerReceivingYards + " " + playerReceivingAverage + " " + playerReceivingTouchdowns
+                    + " " + playerReceivingLong + " " + playerReceiving20Plus + " " + playerReceiving40Plus
+                    + " " + playerReceivingFumbles + " " + playerTacklesSolo + " " + playerTacklesTotal
+                    + " " + playerTacklesAssist + " " + playerSacks + " " + playerSacks
+                    + " " + playerSackYards + " " + playerSafeties + " " + playerTacklesForLoss
+                    + " " + playerInterceptions + " " + playerInterceptionYards + " " + playerInterceptionAverage
+                    + " " + playerInterceptionLong + " " + playerPassesDefended + " " + playerStuffs
+                    + " " + playerStuffYards + " " + playerKB + " " + playerFumbles + " " + playerFumblesLost
+                    + " " + playerFumblesForced + " " + playerFumblesOwnReceived + " " + playerFumblesOppReceived
+                    + " " + playerFumblesReceivingYards + " " + playerKickReturn + " " + playerKickReturnYards
+                    + " " + playerKickReturnAverage + " " + playerKickReturnAverage + " " + playerKickReturnLong
+                    + " " + playerKickReturnTouchdowns + " " + playerKickReturn20Plus + " " + playerKickReturn40Plus
+                    + " " + playerKickReturnFC + " " + playerKickReturnFumbles + " " + playerPuntReturn
+                    + " " + playerPuntReturnYards + " " + playerPuntReturnAverage + " " + playerPuntReturnLong
+                    + " " + playerPuntReturnTouchdowns + " " + playerPuntReturn20Plus + " " +playerPuntReturn40Plus
+                    + " " + playerPuntReturnFC + " " + playerPuntReturnFumbles + " " + playerTwoPointAttempts
+                    + " " + playerTwoPointMakes + " " + playerTwoPointPassAttempts + " " + playerTwoPointPassMakes
+                    + " " + playerTwoPointPassReceived + " " + playerTwoPointRushAttempts + " " + playerTwoPointRushMakes;
+
+
+            return nflPlayerInfoToString;
 
         }
 
@@ -283,11 +681,6 @@ public class NflPlayerStatsFragment extends ListFragment {
         NflPlayerInfo nflPlayerInfo = null;
 
         parser.require(XmlPullParser.START_TAG, ns, "cum:playerstatsentry");
-        /*String playerId = null;
-        String playerLastName = null;
-        String playerFirstName = null;
-        String playerJerseyNumber = null;
-        String playerPosition = null;*/
 
         while (parser.next() != XmlPullParser.END_TAG) {
 
@@ -295,46 +688,25 @@ public class NflPlayerStatsFragment extends ListFragment {
                 continue;
             }
 
-            String name = parser.getName(); //cum:player
+            String name = parser.getName();
 
             if (name.equals("cum:player")) {
 
                 nflPlayerInfo = readPlayerInfo(parser);
 
-                //return nflPlayerInfo;
+            } else if (name.equals("cum:team")) {
+
+
+
+            } else if (name.equals("cum:stats")) {
+
+
 
             } else {
 
                 skip(parser);
 
             }
-
-            /*if (name.equals("cum:ID")) {
-
-                playerId = readPlayerId(parser);
-
-            } else if (name.equals("cum:LastName")) {
-
-                playerLastName = readPlayerLastName(parser);
-
-            } else if (name.equals("cum:FirstName")) {
-
-                playerFirstName = readPlayerFirstName(parser);
-
-            } else if (name.equals("cum:JerseyNumber")) {
-
-                playerJerseyNumber = readPlayerJerseyNumber(parser);
-
-            } else if (name.equals("cum:Position")) {
-
-                playerPosition = readPlayerPosition(parser);
-
-            } else {
-
-                skip(parser);
-
-            }
-            */
 
         }
 
@@ -344,10 +716,8 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     private NflPlayerInfo readPlayerInfo(XmlPullParser parser) throws XmlPullParserException, IOException {
 
-        String playerId = null;
         String playerLastName = null;
         String playerFirstName = null;
-        String playerJerseyNumber = null;
         String playerPosition = null;
 
         while (parser.next() != XmlPullParser.END_TAG) {
@@ -360,7 +730,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
             if (name.equals("cum:ID")) {
 
-                playerId = readPlayerId(parser);
+                skip(parser);
 
             } else if (name.equals("cum:LastName")) {
 
@@ -372,7 +742,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
             } else if (name.equals("cum:JerseyNumber")) {
 
-                playerJerseyNumber = readPlayerJerseyNumber(parser);
+                skip(parser);
 
             } else if (name.equals("cum:Position")) {
 
@@ -386,16 +756,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
         }
 
-        return new NflPlayerInfo(playerId, playerLastName, playerFirstName, playerJerseyNumber, playerPosition);
-
-    }
-
-    private String readPlayerId(XmlPullParser parser) throws IOException, XmlPullParserException {
-
-        parser.require(XmlPullParser.START_TAG, ns, "cum:ID");
-        String playerId = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "cum:ID");
-        return playerId;
+        return new NflPlayerInfo(playerLastName, playerFirstName, playerPosition);
 
     }
 
@@ -417,21 +778,58 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     }
 
-    private String readPlayerJerseyNumber(XmlPullParser parser) throws IOException, XmlPullParserException {
-
-        parser.require(XmlPullParser.START_TAG, ns, "cum:JerseyNumber");
-        String playerJerseyNumber = readText(parser);
-        parser.require(XmlPullParser.END_TAG, ns, "cum:JerseyNumber");
-        return playerJerseyNumber;
-
-    }
-
     private String readPlayerPosition(XmlPullParser parser) throws IOException, XmlPullParserException {
 
         parser.require(XmlPullParser.START_TAG, ns, "cum:Position");
         String playerPosition = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "cum:Position");
         return playerPosition;
+
+    }
+
+    private String readPlayerTeamCity(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:City");
+        String playerTeamCity = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:City");
+        return playerTeamCity;
+
+    }
+
+    private String readPlayerTeamName(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Name");
+        String playerTeamName = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Name");
+        return playerTeamName;
+
+
+    }
+
+    private String readPlayerGamesPlayer(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:GamesPlayed");
+        String playerGamesPlayed = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:GamesPlayed");
+        return playerGamesPlayed;
+
+    }
+
+    private String readPlayerPassingAttempts(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassAttempts");
+        String playerPassAttempts = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassAttempts");
+        return playerPassAttempts;
+
+    }
+
+    private String readPlayerPassingCompletions(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PassCompletions");
+        String playerPassCompletions = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PassCompletions");
+        return playerPassCompletions;
 
     }
 
@@ -467,7 +865,7 @@ public class NflPlayerStatsFragment extends ListFragment {
         }
     }
 
-    public static class NflTeamInfo {
+    /*public static class NflTeamInfo {
 
         int teamId;
         String teamCity;
@@ -487,87 +885,87 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     public static class NflPlayerStatsInfo {
 
-        int playerGamesPlayed;
-        int playerPassingAttempts;
-        int playerPassingCompletions;
-        int playerPassingPercentage;
-        int playerPassingYards;
-        int playerPassingAverage;
-        int playerPassingYardsPerAttempt;
-        int playerPassingTouchdowns;
-        int playerPassingTouchdownPercentage;
-        int playerPassingInterceptions;
-        int playerPassingInterceptionPercentage;
-        int playerPassingLong;
-        int playerPassing20Plus;
-        int playerPassing40Plus;
-        int playerPassingSacks;
-        int playerPassingSackYards;
-        int playerQBRating;
-        int playerRushingAttempts;
-        int playerRushingYards;
-        int playerRushingAverage;
-        int playerRushingTouchdowns;
-        int playerRushingLong;
-        int playerRushing20Plus;
-        int playerRushing40Plus;
-        int playerRushingFumbles;
-        int playerTargets;
-        int playerReceptions;
-        int playerReceivingYards;
-        int playerReceivingAverage;
-        int playerReceivingTouchdowns;
-        int playerReceivingLong;
-        int playerReceiving20Plus;
-        int playerReceiving40Plus;
-        int playerReceivingFumbles;
-        int playerTacklesSolo;
-        int playerTacklesTotal;
-        int playerTacklesAssist;
-        int playerSacks;
-        int playerSackYards;
-        int playerSafeties;
-        int playerTacklesForLoss;
-        int playerInterceptions;
-        int playerInterceptionYards;
-        int playerInterceptionAverage;
-        int playerInterceptionLong;
-        int playerPassesDefended;
-        int playerStuffs;
-        int playerStuffYards;
-        int playerKB;
-        int playerFumbles;
-        int playerFumblesLost;
-        int playerFumblesForced;
-        int playerFumblesOwnReceived;
-        int playerFumblesOppReceived;
-        int playerFumblesReceivingYards;
-        int playerFumbleTouchdowns;
-        int playerKickReturn;
-        int playerKickReturnYards;
-        int playerKickReturnAverage;
-        int playerKickReturnLong;
-        int playerKickReturnTouchdowns;
-        int playerKickReturn20Plus;
-        int playerKickReturn40Plus;
-        int playerKickReturnFC;
-        int playerKickReturnFumbles;
-        int playerPuntReturn;
-        int playerPuntReturnYards;
-        int playerPuntReturnAverage;
-        int playerPuntReutrnLong;
-        int playerPuntReturnTouchdowns;
-        int playerPuntReturn20Plus;
-        int playerPuntReturn40Plus;
-        int playerPuntReturnFC;
-        int playerPuntReturnFumbles;
-        int playerTwoPointAttempts;
-        int playerTwoPointMakes;
-        int playerTwoPointPassAttempts;
-        int playerTwoPointPassMakes;
-        int playerTwoPointPassReceived;
-        int playerTwoPointRushAttempts;
-        int playerTwoPointRushMakes;
+        String playerGamesPlayed;
+        String playerPassingAttempts;
+        String playerPassingCompletions;
+        String playerPassingPercentage;
+        String playerPassingYards;
+        String playerPassingAverage;
+        String playerPassingYardsPerAttempt;
+        String playerPassingTouchdowns;
+        String playerPassingTouchdownPercentage;
+        String playerPassingInterceptions;
+        String playerPassingInterceptionPercentage;
+        String playerPassingLong;
+        String playerPassing20Plus;
+        String playerPassing40Plus;
+        String playerPassingSacks;
+        String playerPassingSackYards;
+        String playerQBRating;
+        String playerRushingAttempts;
+        String playerRushingYards;
+        String playerRushingAverage;
+        String playerRushingTouchdowns;
+        String playerRushingLong;
+        String playerRushing20Plus;
+        String playerRushing40Plus;
+        String playerRushingFumbles;
+        String playerTargets;
+        String playerReceptions;
+        String playerReceivingYards;
+        String playerReceivingAverage;
+        String playerReceivingTouchdowns;
+        String playerReceivingLong;
+        String playerReceiving20Plus;
+        String playerReceiving40Plus;
+        String playerReceivingFumbles;
+        String playerTacklesSolo;
+        String playerTacklesTotal;
+        String playerTacklesAssist;
+        String playerSacks;
+        String playerSackYards;
+        String playerSafeties;
+        String playerTacklesForLoss;
+        String playerInterceptions;
+        String playerInterceptionYards;
+        String playerInterceptionAverage;
+        String playerInterceptionLong;
+        String playerPassesDefended;
+        String playerStuffs;
+        String playerStuffYards;
+        String playerKB;
+        String playerFumbles;
+        String playerFumblesLost;
+        String playerFumblesForced;
+        String playerFumblesOwnReceived;
+        String playerFumblesOppReceived;
+        String playerFumblesReceivingYards;
+        String playerFumbleTouchdowns;
+        String playerKickReturn;
+        String playerKickReturnYards;
+        String playerKickReturnAverage;
+        String playerKickReturnLong;
+        String playerKickReturnTouchdowns;
+        String playerKickReturn20Plus;
+        String playerKickReturn40Plus;
+        String playerKickReturnFC;
+        String playerKickReturnFumbles;
+        String playerPuntReturn;
+        String playerPuntReturnYards;
+        String playerPuntReturnAverage;
+        String playerPuntReutrnLong;
+        String playerPuntReturnTouchdowns;
+        String playerPuntReturn20Plus;
+        String playerPuntReturn40Plus;
+        String playerPuntReturnFC;
+        String playerPuntReturnFumbles;
+        String playerTwoPointAttempts;
+        String playerTwoPointMakes;
+        String playerTwoPointPassAttempts;
+        String playerTwoPointPassMakes;
+        String playerTwoPointPassReceived;
+        String playerTwoPointRushAttempts;
+        String playerTwoPointRushMakes;
 
         public NflPlayerStatsInfo(int playerGamesPlayed, int playerPassingAttempts, int playerPassingCompletions, int playerPassingPercentage, int playerPassingYards, int playerPassingAverage, int playerPassingYardsPerAttempt, int playerPassingTouchdowns, int playerPassingTouchdownPercentage, int playerPassingInterceptions, int playerPassingInterceptionPercentage, int playerPassingLong, int playerPassing20Plus, int playerPassing40Plus, int playerPassingSacks, int playerPassingSackYards, int playerQBRating, int playerRushingAttempts, int playerRushingYards, int playerRushingAverage, int playerRushingTouchdowns, int playerRushingLong, int playerRushing20Plus, int playerRushing40Plus, int playerRushingFumbles, int playerTargets, int playerReceptions, int playerReceivingYards, int playerReceivingAverage, int playerReceivingTouchdowns, int playerReceivingLong, int playerReceiving20Plus, int playerReceiving40Plus, int playerReceivingFumbles, int playerTacklesSolo, int playerTacklesTotal, int playerTacklesAssist, int playerSacks, int playerSackYards, int playerSafeties, int playerTacklesForLoss, int playerInterceptions, int playerInterceptionYards, int playerInterceptionAverage, int playerInterceptionLong, int playerPassesDefended, int playerStuffs, int playerStuffYards, int playerKB, int playerFumbles, int playerFumblesLost, int playerFumblesForced, int playerFumblesOwnReceived, int playerFumblesOppReceived, int playerFumblesReceivingYards, int playerFumbleTouchdowns, int playerKickReturn, int playerKickReturnYards, int playerKickReturnAverage, int playerKickReturnLong, int playerKickReturnTouchdowns, int playerKickReturn20Plus, int playerKickReturn40Plus, int playerKickReturnFC, int playerKickReturnFumbles, int playerPuntReturn, int playerPuntReturnYards, int playerPuntReturnAverage, int playerPuntReutrnLong, int playerPuntReturnTouchdowns, int playerPuntReturn20Plus, int playerPuntReturn40Plus, int playerPuntReturnFC, int playerPuntReturnFumbles, int playerTwoPointAttempts, int playerTwoPointMakes, int playerTwoPointPassAttempts, int playerTwoPointPassMakes, int playerTwoPointPassReceived, int playerTwoPointRushAttempts, int playerTwoPointRushMakes) {
             this.playerGamesPlayed = playerGamesPlayed;
@@ -652,6 +1050,6 @@ public class NflPlayerStatsFragment extends ListFragment {
             this.playerTwoPointRushAttempts = playerTwoPointRushAttempts;
             this.playerTwoPointRushMakes = playerTwoPointRushMakes;
         }
-    }
+    }*/
 
 }
