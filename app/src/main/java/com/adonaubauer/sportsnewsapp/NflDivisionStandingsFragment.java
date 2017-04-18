@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Xml;
 import android.widget.ArrayAdapter;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -21,9 +26,11 @@ import java.util.ArrayList;
 
 public class NflDivisionStandingsFragment extends ListFragment {
 
+    public static final String ns = null;
+
     ArrayList<String> nflDivisionStandingsList;
 
-    private String url = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/division_team_standings.xml?teamstats=W,L,T,PF,PA";
+    private static final String url = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/division_team_standings.xml?teamstats=W,L,T";
 
     public NflDivisionStandingsFragment() {
 
@@ -119,6 +126,118 @@ public class NflDivisionStandingsFragment extends ListFragment {
             return nflDivisionStandingsList;
 
         }
+
+    }
+
+    private static class NflDivisionalInfo {
+
+        String divisionalName;
+        String teamCity;
+        String teamName;
+        String divisionalRank;
+        String teamWins;
+        String teamLosses;
+        String teamTies;
+
+        public void setDivisionalName(String divisionalName) {
+            this.divisionalName = divisionalName;
+        }
+
+        public void setTeamCity(String teamCity) {
+            this.teamCity = teamCity;
+        }
+
+        public void setTeamName(String teamName) {
+            this.teamName = teamName;
+        }
+
+        public void setDivisionalRank(String divisionalRank) {
+            this.divisionalRank = divisionalRank;
+        }
+
+        public void setTeamWins(String teamWins) {
+            this.teamWins = teamWins;
+        }
+
+        public void setTeamLosses(String teamLosses) {
+            this.teamLosses = teamLosses;
+        }
+
+        public void setTeamTies(String teamTies) {
+            this.teamTies = teamTies;
+        }
+
+        public String toString() {
+
+            String divisionalInfoToString = teamCity + " " + teamName + " " + teamWins + " " + teamLosses + " " + teamTies;
+
+            return divisionalInfoToString;
+
+        }
+
+    }
+
+    public ArrayList<NflDivisionalInfo> parse(InputStream in) throws IOException, XmlPullParserException {
+
+        try {
+
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(in, null);
+            parser.nextTag();
+            return readFeed(parser);
+
+        } finally {
+
+            in.close();
+
+        }
+
+    }
+
+    private ArrayList<NflDivisionalInfo> readFeed(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        ArrayList<NflDivisionalInfo> entries = new ArrayList<>();
+
+        parser.require(XmlPullParser.START_TAG, ns, "div:divisionteamstandings");
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+
+                continue;
+
+            }
+
+            String name = parser.getName();
+
+            /*if (name.equals("div:lastUpdatedOn")) {
+
+                skip(parser);
+
+            } else if (name.equals("div:division")) {
+
+                entries.add(readEntry(parser));
+
+            } else {
+
+                skip(parser);
+
+            }*/
+
+        }
+
+        return entries;
+
+    }
+
+    private NflDivisionalInfo readEntry(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        NflDivisionalInfo nflDivisionalInfo = null;
+
+        parser.require(XmlPullParser.START_TAG, ns, "div:");
+
+        return nflDivisionalInfo;
 
     }
 
