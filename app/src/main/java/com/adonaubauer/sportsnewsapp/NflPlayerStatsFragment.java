@@ -875,8 +875,24 @@ public class NflPlayerStatsFragment extends ListFragment {
                     + " " + playerPuntReturnTouchdowns + " " + playerPuntReturn20Plus + " " +playerPuntReturn40Plus
                     + " " + playerPuntReturnFC + " " + playerPuntReturnFumbles + " " + playerTwoPointAttempts
                     + " " + playerTwoPointMakes + " " + playerTwoPointPassAttempts + " " + playerTwoPointPassMakes
-                    + " " + playerTwoPointPassReceived + " " + playerTwoPointRushAttempts + " " + playerTwoPointRushMakes;
-                    //ADD IN KICKER/PUNTER STATS
+                    + " " + playerTwoPointPassReceived + " " + playerTwoPointRushAttempts + " " + playerTwoPointRushMakes
+                    + " " + playerFieldGoalBlock + " " + playerFieldGoalMakes + " " + playerFieldGoalAttempts
+                    + " " + playerFieldGoalPercentage + " " + playerFieldGoalMade1to19 + " " + playerFieldGoalMade1to19
+                    + " " + playerFieldGoalAttempts1to19 + " " + playerFieldGoal1to19Percent + " " + playerFieldGoalMade20to29
+                    + " " + playerFieldGoalAttempts20to29 + " " + playerFieldGoal20to29Percent + " " + playerFieldGoalMade30to39
+                    + " " + playerFieldGoalAttempts30to39 + " " + playerFieldGoal30to39Percent + " " + playerFieldGoalMade40to49
+                    + " " + playerFieldGoalAttempts40to49 + " " + playerFieldGoal40to49Percent + " " + playerFieldGoalMade50Plus
+                    + " " + playerFieldGoalAttempts50Plus + " " + playerFieldGoal50PlusPercent + " " + playerFieldGoalLong
+                    + " " + playerExtraPointBlock + " " + playerExtraPointMakes + " " + playerExtraPointAttempts
+                    + " " + playerExtraPointPercentage + playerFieldGoalAndExtraPointPoints + " " + playerKickoffs
+                    + " " + playerKickoffYards + " " + playerKickoffOOB + " " + playerKickoffAverage
+                    + " " + playerKickoffTouchback + " " + playerKickoffPercent + " " + playerKickoffReturns
+                    + " " + playerKickoffReturnYards + " " + playerKickoffReturnYardAverage + " " + playerKickoffTouchdowns
+                    + " " + playerKickoffOS + " " + playerKickoffOSR + " " + playerPunts + " " + playerPuntYards
+                    + " " + playerPuntNetYards + " " + playerPuntLong + " " + playerPuntAverage + " " + playerPuntBlock
+                    + " " + playerPuntOOB + " " + playerPuntDown + " " + playerPuntInside20 + " " + playerPuntInside20Percent
+                    + " " + playerPuntTouchback + " " + playerPuntTouchbackPercent + " " + playerPuntFC + " " + playerPuntsReturn
+                    + " " + playerPuntsReturnYards + " " + playerPuntReturnAverage;
 
             return nflPlayerInfoToString;
 
@@ -2463,6 +2479,240 @@ public class NflPlayerStatsFragment extends ListFragment {
         String playerTwoPointRushMakes = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "cum:TwoPtRushMade");
         return playerTwoPointRushMakes;
+
+    }
+
+    private String readPlayerFieldGoalBlock(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgBlk");
+        String playerFieldGoalBlock = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgBlk");
+        return playerFieldGoalBlock;
+
+    }
+
+    private String readPlayerFieldGoalMade(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgMade");
+        String playerFieldGoalMade = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgMade");
+        return playerFieldGoalMade;
+
+    }
+
+    private String readPlayerFieldGoalAttempts(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAtt");
+        String playerFieldGoalAttempts = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAtt");
+        return playerFieldGoalAttempts;
+
+    }
+
+    private String readPlayerFieldGoalPercent(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgPct");
+        String playerFieldGoalPercent = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgPct");
+        return playerFieldGoalPercent;
+
+    }
+
+    private String readPlayerFieldGoalMade1to19(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgMade1_19");
+        String playerFieldGoalMade1to19 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgMade1_19");
+        return playerFieldGoalMade1to19;
+
+    }
+
+    private String readPlayerFieldGoalAttempts1to19(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAtt1_19");
+        String playerFieldGoalAttempts1to19 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAtt1_19");
+        return playerFieldGoalAttempts1to19;
+
+    }
+
+    private String readPlayerFieldGoalPercent1to19(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Fg1_19Pct");
+        String playerFieldGoalPercent1to19 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Fg1_19Pct");
+        return playerFieldGoalPercent1to19;
+
+    }
+
+    private String readPlayerFieldGoalMade20to29(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgMade20_29");
+        String playerFieldGoalMade20to29 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgMade20_29");
+        return playerFieldGoalMade20to29;
+
+    }
+
+    private String readPlayerFieldGoalAttempts20to29(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAtt20_29");
+        String playerFieldGoalAttempts20to29 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAtt20_29");
+        return playerFieldGoalAttempts20to29;
+
+    }
+
+    private String readPlayerFieldGoalPercent20to29(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Fg20_29Pct");
+        String playerFieldGoalPercent20to29 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Fg20_29Pct");
+        return playerFieldGoalPercent20to29;
+
+    }
+
+    private String readPlayerFieldGoalMade30to39(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgMade30_39");
+        String playerFieldGoalMade30to39 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgMade30_39");
+        return playerFieldGoalMade30to39;
+
+    }
+
+    private String readPlayerFieldGoalAttempts30to39(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAtt30_39");
+        String playerFieldGoalAttempts30to39 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAtt30_39");
+        return playerFieldGoalAttempts30to39;
+
+    }
+
+    private String readPlayerFieldGoalPercent30to39(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Fg30_39Pct");
+        String playerFieldGoalPercent30to39 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Fg30_39Pct");
+        return playerFieldGoalPercent30to39;
+
+    }
+
+    private String readPlayerFieldGoalMade40to49(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgMade40_49");
+        String playerFieldGoalMade40to49 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgMade40_49");
+        return playerFieldGoalMade40to49;
+
+    }
+
+    private String readPlayerFieldGoalAttempts40to49(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAtt40_49");
+        String playerFieldGoalAttempts40to49 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAtt40_49");
+        return playerFieldGoalAttempts40to49;
+
+    }
+
+    private String readPlayerFieldGoalPercent40to49(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Fg40_49Pct");
+        String playerFieldGoalPercent40to49 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Fg40_49Pct");
+        return playerFieldGoalPercent40to49;
+
+    }
+
+    private String readPlayerFieldGoalMade50Plus(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgMade50Plus");
+        String playerFieldGoalMade40to49 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgMade50Plus");
+        return playerFieldGoalMade40to49;
+
+    }
+
+    private String readPlayerFieldGoalAttempts50Plus(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAtt50Plus");
+        String playerFieldGoalAttempts50Plus = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAtt50Plus");
+        return playerFieldGoalAttempts50Plus;
+
+    }
+
+    private String readPlayerFieldGoalPercent50Plus(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Fg50PlusPct");
+        String playerFieldGoalPercent50Plus = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Fg50PlusPct");
+        return playerFieldGoalPercent50Plus;
+
+    }
+
+    private String readPlayerFieldGoalLong(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgLng");
+        String playerFieldGoalLong = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgLng");
+        return playerFieldGoalLong;
+
+    }
+
+    private String readPlayerExtraPointBlock(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:XpBlk");
+        String playerExtraPointBlock = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:XpBlk");
+        return playerExtraPointBlock;
+
+    }
+
+    private String readPlayerExtraPointMade(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:XpMade");
+        String playerExtraPointMade = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:XpMade");
+        return playerExtraPointMade;
+
+    }
+
+    private String readPlayerExtraPointAttempts(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:XpAtt");
+        String playerExtraPointAttempts = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:XpAtt");
+        return playerExtraPointAttempts;
+
+    }
+
+    private String readPlayerExtraPointPercent(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:XpPct");
+        String playerExtraPointPercent = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:XpPct");
+        return playerExtraPointPercent;
+
+    }
+
+    private String readPlayerFieldGoalAndExtraPointPoints(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:FgAndXpPts");
+        String playerFieldGoalAndExtraPointPoints = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:FgAndXpPts");
+        return playerFieldGoalAndExtraPointPoints;
+
+    }
+
+    private String readPlayerKickoffs(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Kickoffs");
+        String playerKickoffs = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Kickoffs");
+        return playerKickoffs;
 
     }
 
