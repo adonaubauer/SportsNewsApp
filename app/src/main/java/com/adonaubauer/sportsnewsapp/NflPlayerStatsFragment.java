@@ -273,6 +273,7 @@ public class NflPlayerStatsFragment extends ListFragment {
         String playerPuntNetYards;
         String playerPuntLong;
         String playerPuntAverage;
+        String playerPuntNetAverage;
         String playerPuntBlock;
         String playerPuntOOB;
         String playerPuntDown;
@@ -801,6 +802,10 @@ public class NflPlayerStatsFragment extends ListFragment {
             this.playerPuntAverage = playerPuntAverage;
         }
 
+        public void setPlayerPuntNetAverage(String playerPuntNetAverage) {
+            this.playerPuntNetAverage = playerPuntNetAverage;
+        }
+
         public void setPlayerPuntBlock(String playerPuntBlock) {
             this.playerPuntBlock = playerPuntBlock;
         }
@@ -889,10 +894,10 @@ public class NflPlayerStatsFragment extends ListFragment {
                     + " " + playerKickoffTouchback + " " + playerKickoffPercent + " " + playerKickoffReturns
                     + " " + playerKickoffReturnYards + " " + playerKickoffReturnYardAverage + " " + playerKickoffTouchdowns
                     + " " + playerKickoffOS + " " + playerKickoffOSR + " " + playerPunts + " " + playerPuntYards
-                    + " " + playerPuntNetYards + " " + playerPuntLong + " " + playerPuntAverage + " " + playerPuntBlock
+                    + " " + playerPuntNetYards + " " + playerPuntLong + " " + playerPuntAverage + " " + playerPuntNetAverage + " " + playerPuntBlock
                     + " " + playerPuntOOB + " " + playerPuntDown + " " + playerPuntInside20 + " " + playerPuntInside20Percent
                     + " " + playerPuntTouchback + " " + playerPuntTouchbackPercent + " " + playerPuntFC + " " + playerPuntsReturn
-                    + " " + playerPuntsReturnYards + " " + playerPuntReturnAverage;
+                    + " " + playerPuntsReturnYards + " " + playerPuntsReturnAverage;
 
             return nflPlayerInfoToString;
 
@@ -1168,6 +1173,60 @@ public class NflPlayerStatsFragment extends ListFragment {
         String playerTwoPointPassReceived;
         String playerTwoPointRushAttempts;
         String playerTwoPointRushMakes;
+        String playerFieldGoalBlock;
+        String playerFieldGoalMakes;
+        String playerFieldGoalAttempts;
+        String playerFieldGoalPercentage;
+        String playerFieldGoalMade1to19;
+        String playerFieldGoalAttempts1to19;
+        String playerFieldGoal1to19Percent;
+        String playerFieldGoalMade20to29;
+        String playerFieldGoalAttempts20to29;
+        String playerFieldGoal20to29Percent;
+        String playerFieldGoalMade30to39;
+        String playerFieldGoalAttempts30to39;
+        String playerFieldGoal30to39Percent;
+        String playerFieldGoalMade40to49;
+        String playerFieldGoalAttempts40to49;
+        String playerFieldGoal40to49Percent;
+        String playerFieldGoalMade50Plus;
+        String playerFieldGoalAttempts50Plus;
+        String playerFieldGoal50PlusPercent;
+        String playerFieldGoalLong;
+        String playerExtraPointBlock;
+        String playerExtraPointMakes;
+        String playerExtraPointAttempts;
+        String playerExtraPointPercentage;
+        String playerFieldGoalAndExtraPointPoints;
+        String playerKickoffs;
+        String playerKickoffYards;
+        String playerKickoffOOB;
+        String playerKickoffAverage;
+        String playerKickoffTouchback;
+        String playerKickoffPercent;
+        String playerKickoffReturns;
+        String playerKickoffReturnYards;
+        String playerKickoffReturnYardAverage;
+        String playerKickoffTouchdowns;
+        String playerKickoffOS;
+        String playerKickoffOSR;
+        String playerPunts;
+        String playerPuntYards;
+        String playerPuntNetYards;
+        String playerPuntLong;
+        String playerPuntAverage;
+        String playerPuntNetAverage;
+        String playerPuntBlock;
+        String playerPuntOOB;
+        String playerPuntDown;
+        String playerPuntInside20;
+        String playerPuntInside20Percent;
+        String playerPuntTouchback;
+        String playerPuntTouchbackPercent;
+        String playerPuntFC;
+        String playerPuntsReturn;
+        String playerPuntsReturnYards;
+        String playerPuntsReturnAverage;
 
         while (parser.next() != XmlPullParser.END_TAG) {
 
@@ -1203,7 +1262,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
                 statsInfo.setPlayerPassingPercentage(playerPassingPercentage);
 
-            } else if (name.equals("cum:PassYds")) {
+            } else if (name.equals("cum:PassYards")) {
 
                 playerPassingYards = readPlayerPassingYards(parser);
 
@@ -1407,7 +1466,7 @@ public class NflPlayerStatsFragment extends ListFragment {
 
                 statsInfo.setPlayerSacks(playerSacks);
 
-            } else if (name.equals("cum:SackY")) {
+            } else if (name.equals("cum:SackYds")) {
 
                 playerSackYards = readPlayerSackYards(parser);
 
@@ -1676,6 +1735,329 @@ public class NflPlayerStatsFragment extends ListFragment {
                 playerTwoPointRushMakes = readPlayerTwoPointRushMakes(parser);
 
                 statsInfo.setPlayerTwoPointRushMakes(playerTwoPointRushMakes);
+
+            } else if (name.equals("cum:FgBlk")) {
+
+                playerFieldGoalBlock = readPlayerFieldGoalBlock(parser);
+
+                statsInfo.setPlayerFieldGoalBlock(playerFieldGoalBlock);
+
+            } else if (name.equals("cum:FgMade")) {
+
+                playerFieldGoalMakes = readPlayerFieldGoalMade(parser);
+
+                statsInfo.setPlayerFieldGoalMakes(playerFieldGoalMakes);
+
+            } else if (name.equals("cum:FgAtt")) {
+
+                playerFieldGoalAttempts = readPlayerFieldGoalAttempts(parser);
+
+                statsInfo.setPlayerFieldGoalAttempts(playerFieldGoalAttempts);
+
+            } else if (name.equals("cum:FgPct")) {
+
+                playerFieldGoalPercentage = readPlayerFieldGoalPercent(parser);
+
+                statsInfo.setPlayerFieldGoalPercentage(playerFieldGoalPercentage);
+
+            } else if (name.equals("cum:FgMade1_19")) {
+
+                playerFieldGoalMade1to19 = readPlayerFieldGoalMade1to19(parser);
+
+                statsInfo.setPlayerFieldGoalMade1to19(playerFieldGoalMade1to19);
+
+            } else if (name.equals("cum:FgAtt1_19")) {
+
+                playerFieldGoalAttempts1to19 = readPlayerFieldGoalAttempts1to19(parser);
+
+                statsInfo.setPlayerFieldGoalAttempts1to19(playerFieldGoalAttempts1to19);
+
+            } else if (name.equals("cum:Fg1_19Pct")) {
+
+                playerFieldGoal1to19Percent = readPlayerFieldGoalPercent1to19(parser);
+
+                statsInfo.setPlayerFieldGoal1to19Percent(playerFieldGoal1to19Percent);
+
+            } else if (name.equals("cum:FgMade20_29")) {
+
+                playerFieldGoalMade20to29 = readPlayerFieldGoalMade20to29(parser);
+
+                statsInfo.setPlayerFieldGoalMade20to29(playerFieldGoalMade20to29);
+
+            } else if (name.equals("cum:FgAtt20_29")) {
+
+                playerFieldGoalAttempts20to29 = readPlayerFieldGoalAttempts20to29(parser);
+
+                statsInfo.setPlayerFieldGoalAttempts20to29(playerFieldGoalAttempts20to29);
+
+            } else if (name.equals("cum:Fg20_29Pct")) {
+
+                playerFieldGoal20to29Percent = readPlayerFieldGoalPercent20to29(parser);
+
+                statsInfo.setPlayerFieldGoal20to29Percent(playerFieldGoal20to29Percent);
+
+            } else if (name.equals("cum:FgMade30_39")) {
+
+                playerFieldGoalMade30to39 = readPlayerFieldGoalMade30to39(parser);
+
+                statsInfo.setPlayerFieldGoalMade30to39(playerFieldGoalMade30to39);
+
+            } else if (name.equals("cum:FgAtt30_39")) {
+
+                playerFieldGoalAttempts30to39 = readPlayerFieldGoalAttempts30to39(parser);
+
+                statsInfo.setPlayerFieldGoalAttempts30to39(playerFieldGoalAttempts30to39);
+
+            } else if (name.equals("cum:Fg30_39Pct")) {
+
+                playerFieldGoal30to39Percent = readPlayerFieldGoalPercent30to39(parser);
+
+                statsInfo.setPlayerFieldGoal30to39Percent(playerFieldGoal30to39Percent);
+
+            } else if (name.equals("cum:FgMade40_49")) {
+
+                playerFieldGoalMade40to49 = readPlayerFieldGoalMade40to49(parser);
+
+                statsInfo.setPlayerFieldGoalMade40to49(playerFieldGoalMade40to49);
+
+            } else if (name.equals("cum:FgAtt40_49")) {
+
+                playerFieldGoalAttempts40to49 = readPlayerFieldGoalAttempts40to49(parser);
+
+                statsInfo.setPlayerFieldGoalAttempts40to49(playerFieldGoalAttempts40to49);
+
+            } else if (name.equals("cum:Fg40_49Pct")) {
+
+                playerFieldGoal40to49Percent = readPlayerFieldGoalPercent40to49(parser);
+
+                statsInfo.setPlayerFieldGoal40to49Percent(playerFieldGoal40to49Percent);
+
+            } else if (name.equals("cum:FgMade50Plus")) {
+
+                playerFieldGoalMade50Plus = readPlayerFieldGoalMade50Plus(parser);
+
+                statsInfo.setPlayerFieldGoalMade50Plus(playerFieldGoalMade50Plus);
+
+            } else if (name.equals("cum:FgAtt50Plus")) {
+
+                playerFieldGoalAttempts50Plus = readPlayerFieldGoalAttempts50Plus(parser);
+
+                statsInfo.setPlayerFieldGoalAttempts50Plus(playerFieldGoalAttempts50Plus);
+
+            } else if (name.equals("cum:Fg50PlusPct")) {
+
+                playerFieldGoal50PlusPercent = readPlayerFieldGoalPercent50Plus(parser);
+
+                statsInfo.setPlayerFieldGoal50PlusPercent(playerFieldGoal50PlusPercent);
+
+            } else if (name.equals("cum:FgLng")) {
+
+                playerFieldGoalLong = readPlayerFieldGoalLong(parser);
+
+                statsInfo.setPlayerFieldGoalLong(playerFieldGoalLong);
+
+            } else if (name.equals("cum:XpBlk")) {
+
+                playerExtraPointBlock = readPlayerExtraPointBlock(parser);
+
+                statsInfo.setPlayerExtraPointBlock(playerExtraPointBlock);
+
+            } else if (name.equals("cum:XpMade")) {
+
+                playerExtraPointMakes = readPlayerExtraPointMade(parser);
+
+                statsInfo.setPlayerExtraPointMakes(playerExtraPointMakes);
+
+            } else if (name.equals("cum:XpAtt")) {
+
+                playerExtraPointAttempts = readPlayerExtraPointAttempts(parser);
+
+                statsInfo.setPlayerExtraPointAttempts(playerExtraPointAttempts);
+
+            } else if (name.equals("cum:XpPct")) {
+
+                playerExtraPointPercentage = readPlayerExtraPointPercent(parser);
+
+                statsInfo.setPlayerExtraPointPercentage(playerExtraPointPercentage);
+
+            } else if (name.equals("cum:FgAndXpPts")) {
+
+                playerFieldGoalAndExtraPointPoints = readPlayerFieldGoalAndExtraPointPoints(parser);
+
+                statsInfo.setPlayerFieldGoalAndExtraPointPoints(playerFieldGoalAndExtraPointPoints);
+
+            } else if (name.equals("cum:Kickoffs")) {
+
+                playerKickoffs = readPlayerKickoffs(parser);
+
+                statsInfo.setPlayerKickoffs(playerKickoffs);
+
+            } else if (name.equals("cum:KoYds")) {
+
+                playerKickoffYards = readPlayerKickoffYards(parser);
+
+                statsInfo.setPlayerKickoffYards(playerKickoffYards);
+
+            } else if (name.equals("cum:KoOOB")) {
+
+                playerKickoffOOB = readPlayerKickoffOOB(parser);
+
+                statsInfo.setPlayerKickoffOOB(playerKickoffOOB);
+
+            } else if (name.equals("cum:KoAvg")) {
+
+                playerKickoffAverage = readPlayerKickoffAverage(parser);
+
+                statsInfo.setPlayerKickoffAverage(playerKickoffAverage);
+
+            } else if (name.equals("cum:KoTB")) {
+
+                playerKickoffTouchback = readPlayerKickofTouchback(parser);
+
+                statsInfo.setPlayerKickoffTouchback(playerKickoffTouchback);
+
+            } else if (name.equals("cum:KoPct")) {
+
+                playerKickoffPercent = readPlayerKickoffPercent(parser);
+
+                statsInfo.setPlayerKickoffPercent(playerKickoffPercent);
+
+            } else if (name.equals("cum:KoRet")) {
+
+                playerKickoffReturns = readPlayerKickoffReturn(parser);
+
+                statsInfo.setPlayerKickoffReturns(playerKickoffReturns);
+
+            } else if (name.equals("cum:KoRetYds")) {
+
+                playerKickoffReturnYards = readPlayerKickoffReturnYards(parser);
+
+                statsInfo.setPlayerKickoffReturnYards(playerKickoffReturnYards);
+
+            } else if (name.equals("cum:KoRetAvgYds")) {
+
+                playerKickoffReturnYardAverage = readPlayerKickoffReturnAverageYards(parser);
+
+                statsInfo.setPlayerKickoffReturnYardAverage(playerKickoffReturnYardAverage);
+
+            } else if (name.equals("cum:KoTD")) {
+
+                playerKickoffTouchdowns = readPlayerKickoffReturnTouchdown(parser);
+
+                statsInfo.setPlayerKickoffTouchdowns(playerKickoffTouchdowns);
+
+            } else if (name.equals("cum:KoOS")) {
+
+                playerKickoffOS = readPlayerKickoffOS(parser);
+
+                statsInfo.setPlayerKickoffOS(playerKickoffOS);
+
+            } else if (name.equals("cum:KoOSR")) {
+
+                playerKickoffOSR = readPlayerKickoffOSR(parser);
+
+                statsInfo.setPlayerKickoffOSR(playerKickoffOSR);
+
+            } else if (name.equals("cum:Punts")) {
+
+                playerPunts = readPlayerPunts(parser);
+
+                statsInfo.setPlayerPunts(playerPunts);
+
+            } else if (name.equals("cum:PuntYds")) {
+
+                playerPuntYards = readPlayerPuntYards(parser);
+
+                statsInfo.setPlayerPuntYards(playerPuntYards);
+
+            } else if (name.equals("cum:PuntNetYds")) {
+
+                playerPuntNetYards = readPlayerPuntNetYards(parser);
+
+                statsInfo.setPlayerPuntNetYards(playerPuntNetYards);
+            } else if (name.equals("cum:PuntLng")) {
+
+                playerPuntLong = readPlayerPuntLong(parser);
+
+                statsInfo.setPlayerPuntLong(playerPuntLong);
+
+            } else if (name.equals("cum:PuntAvg")) {
+
+                playerPuntAverage = readPlayerPuntAverage(parser);
+
+                statsInfo.setPlayerPuntAverage(playerPuntAverage);
+
+            } else if (name.equals("cum:PuntNetAvg")) {
+
+                playerPuntNetAverage = readPlayerPuntNetAverage(parser);
+
+                statsInfo.setPlayerPuntNetAverage(playerPuntNetAverage);
+
+            } else if (name.equals("cum:PuntBlk")) {
+
+                playerPuntBlock = readPlayerPuntBlock(parser);
+
+                statsInfo.setPlayerPuntBlock(playerPuntBlock);
+
+            } else if (name.equals("cum:PuntOOB")) {
+
+                playerPuntOOB = readPlayerPuntOOB(parser);
+
+                statsInfo.setPlayerPuntOOB(playerPuntOOB);
+
+            } else if (name.equals("cum:PuntDown")) {
+
+                playerPuntDown = readPlayerPuntDown(parser);
+
+                statsInfo.setPlayerPuntDown(playerPuntDown);
+
+            } else if (name.equals("cum:PuntIn20")) {
+
+                playerPuntInside20 = readPlayerPuntIn20(parser);
+
+                statsInfo.setPlayerPuntInside20(playerPuntInside20);
+
+            } else if (name.equals("cum:PuntIn20Pct")) {
+
+                playerPuntInside20Percent = readPlayerPuntIn20Percent(parser);
+
+                statsInfo.setPlayerPuntInside20Percent(playerPuntInside20Percent);
+
+            } else if (name.equals("cum:PuntTB")) {
+
+                playerPuntTouchback = readPlayerPuntTB(parser);
+
+                statsInfo.setPlayerPuntTouchback(playerPuntTouchback);
+
+            } else if (name.equals("cum:PuntTBPct")) {
+
+                playerPuntTouchbackPercent = readPlayerPuntTBPercent(parser);
+
+                statsInfo.setPlayerPuntTouchbackPercent(playerPuntTouchbackPercent);
+
+            } else if (name.equals("cum:PuntFC")) {
+
+                playerPuntFC = readPlayerPuntFC(parser);
+
+                statsInfo.setPlayerPuntFC(playerPuntFC);
+
+            } else if (name.equals("cum:PuntRet")) {
+
+                playerPuntsReturn = readPlayerPuntPuntReturn(parser);
+
+                statsInfo.setPlayerPuntsReturn(playerPuntsReturn);
+
+            } else if (name.equals("cum:PuntRetYds")) {
+
+                playerPuntsReturnYards = readPlayerPuntPuntReturnYards(parser);
+
+                statsInfo.setPlayerPuntsReturnYards(playerPuntsReturnYards);
+
+            } else if (name.equals("cum:PuntRetAvg")) {
+
+                playerPuntsReturnAverage = readPlayerPuntPuntReturnAverage(parser);
+
+                statsInfo.setPlayerPuntsReturnAverage(playerPuntsReturnAverage);
 
             } else {
 
@@ -2713,6 +3095,258 @@ public class NflPlayerStatsFragment extends ListFragment {
         String playerKickoffs = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "cum:Kickoffs");
         return playerKickoffs;
+
+    }
+
+    private String readPlayerKickoffYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoYds");
+        String playerKickoffYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoYds");
+        return playerKickoffYards;
+
+    }
+
+    private String readPlayerKickoffOOB(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoOOB");
+        String playerKickoffOOB = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoOOB");
+        return playerKickoffOOB;
+
+    }
+
+    private String readPlayerKickoffAverage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoAvg");
+        String playerKickoffAverage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoAvg");
+        return playerKickoffAverage;
+
+    }
+
+    private String readPlayerKickofTouchback(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoTB");
+        String playerKickoffTouchback = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoTB");
+        return playerKickoffTouchback;
+
+    }
+
+    private String readPlayerKickoffPercent(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoPct");
+        String playerKickoffPercent = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoPct");
+        return playerKickoffPercent;
+
+    }
+
+    private String readPlayerKickoffReturn(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoRet");
+        String playerKickoffReturn = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoRet");
+        return playerKickoffReturn;
+
+    }
+
+    private String readPlayerKickoffReturnYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoRetYds");
+        String playerKickoffReturnYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoRetYds");
+        return playerKickoffReturnYards;
+
+    }
+
+    private String readPlayerKickoffReturnAverageYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoRetAvgYds");
+        String playerKickoffReturnAverageYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoRetAvgYds");
+        return playerKickoffReturnAverageYards;
+
+    }
+
+    private String readPlayerKickoffReturnTouchdown(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoTD");
+        String playerKickoffReturnTouchdown = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoTD");
+        return playerKickoffReturnTouchdown;
+
+    }
+
+    private String readPlayerKickoffOS(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoOS");
+        String playerKickoffOS = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoOS");
+        return playerKickoffOS;
+
+    }
+
+    private String readPlayerKickoffOSR(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:KoOSR");
+        String playerKickoffOSR = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:KoOSR");
+        return playerKickoffOSR;
+
+    }
+
+    private String readPlayerPunts(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:Punts");
+        String playerPunts = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:Punts");
+        return playerPunts;
+
+    }
+
+    private String readPlayerPuntYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntYds");
+        String playerPuntYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntYds");
+        return playerPuntYards;
+
+    }
+
+    private String readPlayerPuntNetYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntNetYds");
+        String playerPuntNetYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntNetYds");
+        return playerPuntNetYards;
+
+    }
+
+    private String readPlayerPuntLong(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntLng");
+        String playerPuntLong = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntLng");
+        return playerPuntLong;
+
+    }
+
+    private String readPlayerPuntAverage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntAvg");
+        String playerPuntAverage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntAvg");
+        return playerPuntAverage;
+
+    }
+
+    private String readPlayerPuntNetAverage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntNetAvg");
+        String playerPuntNetAverage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntNetAvg");
+        return playerPuntNetAverage;
+
+    }
+
+    private String readPlayerPuntBlock(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntBlk");
+        String playerPuntBlock = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntBlk");
+        return playerPuntBlock;
+
+    }
+
+    private String readPlayerPuntOOB(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntOOB");
+        String playerPuntOOB = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntOOB");
+        return playerPuntOOB;
+
+    }
+
+    private String readPlayerPuntDown(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntDown");
+        String playerPuntDown = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntDown");
+        return playerPuntDown;
+
+    }
+
+    private String readPlayerPuntIn20(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntIn20");
+        String playerPuntIn20 = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntIn20");
+        return playerPuntIn20;
+
+    }
+
+    private String readPlayerPuntIn20Percent(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntIn20Pct");
+        String playerPuntIn20Percent = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntIn20Pct");
+        return playerPuntIn20Percent;
+
+    }
+
+    private String readPlayerPuntTB(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntTB");
+        String playerPuntTB = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntTB");
+        return playerPuntTB;
+
+    }
+
+    private String readPlayerPuntTBPercent(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntTBPct");
+        String playerPuntTBPercent = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntTBPct");
+        return playerPuntTBPercent;
+
+    }
+
+    private String readPlayerPuntFC(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntFC");
+        String playerPuntFC = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntFC");
+        return playerPuntFC;
+
+    }
+
+    private String readPlayerPuntPuntReturn(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntRet");
+        String playerPuntReturn = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntRet");
+        return playerPuntReturn;
+
+    }
+
+    private String readPlayerPuntPuntReturnYards(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntRetYds");
+        String playerPuntReturnYards = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntRetYds");
+        return playerPuntReturnYards;
+
+    }
+
+    private String readPlayerPuntPuntReturnAverage(XmlPullParser parser) throws IOException, XmlPullParserException {
+
+        parser.require(XmlPullParser.START_TAG, ns, "cum:PuntRetAvg");
+        String playerPuntReturnAverage = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "cum:PuntRetAvg");
+        return playerPuntReturnAverage;
 
     }
 
