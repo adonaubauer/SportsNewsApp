@@ -34,15 +34,33 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     private static final String url = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/division_team_standings.xml?teamstats=W,L,T";
 
+    int mNum;
+
     public NflDivisionStandingsFragment() {
 
         nflDivisionStandingsList = new ArrayList<>();
 
     }
 
+    static NflDivisionStandingsFragment newInstance(int num) {
+
+        NflDivisionStandingsFragment nflDivisionStandingsFragment = new NflDivisionStandingsFragment();
+
+        Bundle args = new Bundle();
+
+        args.putInt("num", num);
+
+        nflDivisionStandingsFragment.setArguments(args);
+
+        return nflDivisionStandingsFragment;
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mNum = getArguments() != null ? getArguments().getInt("num") : 1;
 
         AsyncTaskNflDivisionStandings asyncTaskNflPlayerStats = new AsyncTaskNflDivisionStandings();
 

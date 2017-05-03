@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MlbViewPagerAdapter mlbViewPagerAdapter;
     TextView welcomeMessage;
 
+    int tabPosition;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         viewPager = (ViewPager) findViewById(R.id.pager);
 
-        nflViewPagerAdapter = new NflViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        /*nflViewPagerAdapter = new NflViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewPager.setAdapter(nflViewPagerAdapter);
 
@@ -94,9 +96,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
+        });*/
 
         welcomeMessage = (TextView) findViewById(R.id.welcome_message);
+
+        if (savedInstanceState != null) {
+
+            welcomeMessage.setText("");
+
+            viewPager.getAdapter();
+
+            viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(final TabLayout.Tab tab) {
+
+                    viewPager.setCurrentItem(tabPosition);
+
+                    tabLayout.getTabAt(tabPosition);
+
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+
+        }
 
     }
 
@@ -160,6 +193,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putInt("TAB SELECTED POSITION", tabLayout.getSelectedTabPosition());
+
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        tabPosition = savedInstanceState.getInt("TAB SELECTED POSITION");
+
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -168,7 +217,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.NFL:
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(0)).commit();
+                nflViewPagerAdapter = new NflViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+                viewPager.setAdapter(nflViewPagerAdapter);
+
+                viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+                getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflViewPagerAdapter.getItem(0)).commit();
 
                 tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                     @Override
@@ -197,6 +252,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     @Override
                     public void onTabReselected(TabLayout.Tab tab) {
+
+                        if (tab.getPosition() == 0) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(0)).commit();
+
+                        } else if (tab.getPosition() == 1) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(1)).commit();
+
+                        } else if (tab.getPosition() == 2) {
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflViewPagerAdapter.getItem(2)).commit();
+
+                        }
 
                     }
                 });

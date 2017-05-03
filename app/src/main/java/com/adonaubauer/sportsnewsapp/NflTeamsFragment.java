@@ -14,9 +14,27 @@ import android.widget.ListView;
 
 public class NflTeamsFragment extends ListFragment {
 
+    int mNum;
+
+    static NflTeamsFragment newInstance(int num) {
+
+        NflTeamsFragment nflTeamsFragment = new NflTeamsFragment();
+
+        Bundle args = new Bundle();
+
+        args.putInt("num", num);
+
+        nflTeamsFragment.setArguments(args);
+
+        return nflTeamsFragment;
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mNum = getArguments() != null ? getArguments().getInt("num") : 1;
 
         int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? android.R.layout.simple_list_item_activated_1 : android.R.layout.simple_list_item_1;
 

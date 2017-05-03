@@ -3,6 +3,7 @@ package com.adonaubauer.sportsnewsapp;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.ListFragment;
 
 /**
  * Created by Austin on 4/7/2017.
@@ -28,15 +29,15 @@ public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
 
             case 0:
 
-                return new NflTeamsFragment();
+                return NflTeamsFragment.newInstance(position);
 
             case 1:
 
-                return new NflDivisionStandingsFragment();
+                return NflDivisionStandingsFragment.newInstance(position);
 
             case 2:
 
-                return new NflPlayerStatsFragment();
+                return NflPlayerStatsFragment.newInstance(position);
 
             default:
 
@@ -44,62 +45,6 @@ public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
         }
-
-        /*} else if (sportTitle.equals("NBA")) {
-
-            switch (position) {
-
-                case 0:
-
-                    NbaTeamsFragment nbaTeamsFragment = new NbaTeamsFragment();
-                    return nbaTeamsFragment;
-
-                case 1:
-
-                    NbaDivisionStandingsFragment nbaDivisionStandingsFragment = new NbaDivisionStandingsFragment();
-                    return nbaDivisionStandingsFragment;
-
-                case 2:
-
-                    NbaPlayerStatsFragment nbaPlayerStatsFragment = new NbaPlayerStatsFragment();
-                    return nbaPlayerStatsFragment;
-
-                default:
-
-                    return null;
-
-            }
-
-        } else if (sportTitle.equals("MLB")) {
-
-            switch (position) {
-
-                case 0:
-
-                    MlbTeamsFragment mlbTeamsFragment = new MlbTeamsFragment();
-                    return mlbTeamsFragment;
-
-                case 1:
-
-                    MlbDivisionStandingsFragment mlbDivisionStandingsFragment = new MlbDivisionStandingsFragment();
-                    return mlbDivisionStandingsFragment;
-
-                case 2:
-
-                    MlbPlayerStatsFragment mlbPlayerStatsFragment = new MlbPlayerStatsFragment();
-                    return mlbPlayerStatsFragment;
-
-                default:
-
-                    return null;
-
-            }
-
-        }
-
-        return null;
-
-        */
 
     }
 
@@ -109,5 +54,4 @@ public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
         return numberOfTabs;
 
     }
-
 }
