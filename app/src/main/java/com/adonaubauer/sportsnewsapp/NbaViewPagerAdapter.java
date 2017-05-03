@@ -5,13 +5,22 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by Austin on 4/7/2017.
+ *
+ * The NbaViewPagerAdapter will get and create the NbaFragments
+ *
  */
 
 public class NbaViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int numberOfTabs;
 
+    /**
+     *
+     * The NbaViewPagerAdapter constructor will get the number of tabs
+     *
+     * @param fragmentManager
+     * @param numberOfTabs
+     */
     public NbaViewPagerAdapter(FragmentManager fragmentManager, int numberOfTabs) {
         super(fragmentManager);
 
@@ -19,8 +28,13 @@ public class NbaViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-
-
+    /**
+     *
+     * @see #getItem(int)
+     *
+     * @param position
+     * @return
+     */
     @Override
     public Fragment getItem(int position) {
 
@@ -47,6 +61,12 @@ public class NbaViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
+    /**
+     *
+     * @see #getCount()
+     *
+     * @return
+     */
     @Override
     public int getCount() {
 

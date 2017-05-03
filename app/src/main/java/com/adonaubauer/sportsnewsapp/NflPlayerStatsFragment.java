@@ -17,7 +17,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Austin on 3/7/2017.
+ * The NflPlayerStatsFragment class will create a list of player stats data
+ *
+ * @see ListFragment
+ *
  */
 
 public class NflPlayerStatsFragment extends ListFragment {
@@ -30,12 +33,25 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     private static final String uRL = "https://www.mysportsfeeds.com/api/feed/pull/nfl/2016-2017-regular/cumulative_player_stats.xml";
 
+    /**
+     *
+     * The NflPlayerStatsFragment constructor creates a new ArrayList of NflPlayerInfo objects
+     *
+     */
     public NflPlayerStatsFragment() {
 
         playerStats = new ArrayList<>();
 
     }
 
+    /**
+     *
+     * The newInstance method creates new NflPlayerStatsFragment objects and returns
+     * the will arguments
+     *
+     * @param num
+     * @return
+     */
     static NflPlayerStatsFragment newInstance(int num) {
 
         NflPlayerStatsFragment nflPlayerStatsFragment = new NflPlayerStatsFragment();
@@ -50,6 +66,11 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +83,31 @@ public class NflPlayerStatsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * The AsyncTaskNflPlayerStats class will send a request to the api
+     *
+     */
     private class AsyncTaskNflPlayerStats extends AsyncTask<String, Void, ArrayList<NflPlayerInfo>> {
 
         HttpURLConnection httpURLConnection;
 
+        /**
+         *
+         * @see #onPreExecute()
+         *
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         *
+         * @see #onPostExecute(ArrayList)
+         *
+         * @param strings
+         */
         @Override
         protected void onPostExecute(ArrayList<NflPlayerInfo> strings) {
             super.onPostExecute(strings);
@@ -81,11 +118,26 @@ public class NflPlayerStatsFragment extends ListFragment {
             setListAdapter(new ArrayAdapter<>(getContext(),layout, strings));
         }
 
+        /**
+         *
+         * @see #doInBackground(String...)
+         *
+         * @param params
+         * @return
+         */
         @Override
         protected ArrayList<NflPlayerInfo> doInBackground(String... params) {
             return sendRequest(params[0]);
         }
 
+        /**
+         *
+         * The sendRequest method will get the api url and send the request
+         * and return the ArrayList of NflPlayerInfo objects
+         *
+         * @param apiUrl
+         * @return
+         */
         private ArrayList<NflPlayerInfo> sendRequest(String apiUrl) {
 
             InputStream stream;
@@ -116,6 +168,15 @@ public class NflPlayerStatsFragment extends ListFragment {
 
         }
 
+        /**
+         *
+         * The downloadUrl method will get the url and create
+         * the HttpURLConnection and return the InputStream
+         *
+         * @param stringUrl
+         * @return
+         * @throws IOException
+         */
         private InputStream downloadUrl(String stringUrl) throws IOException {
 
             String username = "adonaubauer";

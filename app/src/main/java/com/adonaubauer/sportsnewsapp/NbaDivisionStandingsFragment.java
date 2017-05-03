@@ -16,7 +16,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Austin on 3/21/2017.
+ * NbaDivisionStandings will create a list of nba division standings
+ *
+ * @see ListFragment
+ *
  */
 
 public class NbaDivisionStandingsFragment extends ListFragment {
@@ -25,12 +28,23 @@ public class NbaDivisionStandingsFragment extends ListFragment {
 
     String url = "https://www.mysportsfeeds.com/api/feed/pull/nba/2015-2016-regular/division_team_standings.xml?teamstats=W,L,PTS,PTSA";
 
+    /**
+     *
+     * The NbaDivisionStandingsFragment constructor will create a new ArrayList of strings
+     *
+     */
     public NbaDivisionStandingsFragment() {
 
         nbaDivisionStandingsList = new ArrayList<>();
 
     }
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -41,15 +55,34 @@ public class NbaDivisionStandingsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * AsyncTaskNbaDivisionStandings class will create a request to get the nba division standings from
+     * the web api
+     *
+     * @see AsyncTask
+     *
+     */
     private class AsyncTaskNbaDivisionStandings extends AsyncTask<String, Void, ArrayList<String>> {
 
         HttpURLConnection httpURLConnection;
 
+        /**
+         *
+         * @see #onPreExecute()
+         *
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         *
+         * @see #onPostExecute(ArrayList)
+         *
+         * @param strings
+         */
         @Override
         protected void onPostExecute(ArrayList<String> strings) {
 
@@ -61,11 +94,25 @@ public class NbaDivisionStandingsFragment extends ListFragment {
             super.onPostExecute(strings);
         }
 
+        /**
+         *
+         * @see #doInBackground(String...)
+         *
+         * @param params
+         * @return
+         */
         @Override
         protected ArrayList<String> doInBackground(String... params) {
             return sendRequest(params[0]);
         }
 
+        /**
+         *
+         * The sendRequest method will get the api url and send a request
+         *
+         * @param apiUrl
+         * @return
+         */
         private ArrayList<String> sendRequest(String apiUrl) {
 
             try {

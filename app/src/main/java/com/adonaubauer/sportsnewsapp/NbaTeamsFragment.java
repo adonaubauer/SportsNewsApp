@@ -9,11 +9,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
- * Created by Austin on 3/21/2017.
+ * The NbaTeamsFragment will create a list of teams
+ *
+ * @see ListFragment
+ *
  */
 
 public class NbaTeamsFragment extends ListFragment {
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +33,15 @@ public class NbaTeamsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * @see #onListItemClick(ListView, View, int, long)
+     *
+     * @param l
+     * @param v
+     * @param position
+     * @param id
+     */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);

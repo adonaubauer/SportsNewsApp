@@ -16,7 +16,10 @@ import org.w3c.dom.Text;
 import java.util.Arrays;
 
 /**
- * Created by Austin on 4/9/2017.
+ * The TeamActivity class is a new activity that hold team data info
+ *
+ * @see AppCompatActivity
+ *
  */
 
 public class TeamActivity extends AppCompatActivity {
@@ -29,6 +32,12 @@ public class TeamActivity extends AppCompatActivity {
     String[] mlbTeamNames;
     TextView teamNameTextView;
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,20 +121,15 @@ public class TeamActivity extends AppCompatActivity {
 
         }
 
-        /*for (String teamName : getResources().getStringArray(R.array.nba_team_names)) {
-
-            tabLayout.addTab(tabLayout.newTab().setText(teamName));
-
-        }
-
-        for (String teamName : getResources().getStringArray(R.array.mlb_team_names)) {
-
-            tabLayout.addTab(tabLayout.newTab().setText(teamName));
-
-        }*/
-
     }
 
+    /**
+     *
+     * @see #onCreateOptionsMenu(Menu)
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -135,6 +139,13 @@ public class TeamActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @see #onOptionsItemSelected(MenuItem)
+     *
+     * @param menuItem
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
 
@@ -153,6 +164,13 @@ public class TeamActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * The switchToTabNfl method will get the tab
+     * and set the viewPager to the tab item
+     *
+     * @param tab
+     */
     public void switchToTabNfl(String tab) {
 
         if(tab.equals("Arizona Cardinals")){
@@ -223,6 +241,13 @@ public class TeamActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * The switchToTabNba method will get the tab
+     * and set the viewPager to the tab item
+     *
+     * @param tab
+     */
     public void switchToTabNba(String tab) {
 
         if(tab.equals("Atlanta Hawks")){
@@ -293,6 +318,13 @@ public class TeamActivity extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * The switchToTabMlb method will get the tab
+     * and set the viewPager to the tab item
+     *
+     * @param tab
+     */
     public void switchToTabMlb(String tab) {
 
         if(tab.equals("Arizona Diamondbacks")){

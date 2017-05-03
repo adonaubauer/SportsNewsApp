@@ -23,7 +23,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Austin on 3/21/2017.
+ * The NflDivisionStandingsFragment will create a list of Nfl division standings
+ *
+ * @see ListFragment
+ *
  */
 
 public class NflDivisionStandingsFragment extends ListFragment {
@@ -36,12 +39,25 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     int mNum;
 
+    /**
+     *
+     * The NflDivisionStandingsFragment constructor will create a new ArrayList of NflDivisionalObjects
+     *
+     */
     public NflDivisionStandingsFragment() {
 
         nflDivisionStandingsList = new ArrayList<>();
 
     }
 
+    /**
+     *
+     * The newIstance method will create new NflDivisionStandingsFragment objects and
+     * setArguments and return each object
+     *
+     * @param num
+     * @return
+     */
     static NflDivisionStandingsFragment newInstance(int num) {
 
         NflDivisionStandingsFragment nflDivisionStandingsFragment = new NflDivisionStandingsFragment();
@@ -56,6 +72,12 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,15 +90,31 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * The AsyncTaskNflDivisionStandings will send a request to the api
+     *
+     */
     private class AsyncTaskNflDivisionStandings extends AsyncTask<String, Void, ArrayList<String>> {
 
         HttpURLConnection httpURLConnection;
 
+        /**
+         *
+         * @see #onPreExecute()
+         *
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         *
+         * @see #onPostExecute(ArrayList)
+         *
+         * @param strings
+         */
         @Override
         protected void onPostExecute(ArrayList<String> strings) {
 
@@ -88,11 +126,26 @@ public class NflDivisionStandingsFragment extends ListFragment {
             super.onPostExecute(strings);
         }
 
+        /**
+         *
+         * @see #doInBackground(String...)
+         *
+         * @param params
+         * @return
+         */
         @Override
         protected ArrayList<String> doInBackground(String... params) {
             return sendRequest(params[0]);
         }
 
+        /**
+         *
+         * The sendRequest method will send a request to the api
+         * and return an ArrayList of strings
+         *
+         * @param apiUrl
+         * @return
+         */
         private ArrayList<String> sendRequest(String apiUrl) {
 
             InputStream stream;
@@ -123,6 +176,15 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
         }
 
+        /**
+         *
+         * The downloadUrl method will create a HttpURLConnection and
+         * return the InputStream
+         *
+         * @param stringUrl
+         * @return
+         * @throws IOException
+         */
         private InputStream downloadUrl(String stringUrl) throws IOException {
 
             String username = "adonaubauer";
@@ -151,6 +213,12 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * The NflDivisionalInfo class will contain divisional info and get and set each
+     * data field and set the toString to output the data
+     *
+     */
     private static class NflDivisionalInfo {
 
         String divisionalName;
@@ -253,6 +321,15 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * The readEntry method parses through the xml and gets the data
+     *
+     * @param parser
+     * @return
+     * @throws IOException
+     * @throws XmlPullParserException
+     */
     private ArrayList<NflDivisionalInfo> readEntry(XmlPullParser parser) throws IOException, XmlPullParserException {
 
         ArrayList<NflDivisionalInfo> nflDivisionalInfo = new ArrayList<>();
@@ -484,6 +561,14 @@ public class NflDivisionStandingsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * The skip method skips xml tags
+     *
+     * @param parser
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();

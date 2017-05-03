@@ -1,7 +1,7 @@
 package com.adonaubauer.sportsnewsapp;
 
 /**
- * Created by Austin on 4/27/2017.
+ * The NflPlayerInfo class holds the player info data
  */
 
 public class NflPlayerInfo {

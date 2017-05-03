@@ -22,7 +22,13 @@ import android.widget.TextView;
 import java.util.Set;
 
 /**
- * Created by Austin on 2/25/2017.
+ * MainActivity is the main activity class for Sportnews app. This is the launcher class
+ * it contains a navigation drawer and a tab menu
+ *
+ * @author Austin
+ * @see android.support.v7.app.AppCompatActivity
+ * @see android.support.design.widget.NavigationView.OnNavigationItemSelectedListener
+ *
  */
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,6 +46,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     int tabPosition;
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,31 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-
-        /*nflViewPagerAdapter = new NflViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-
-        viewPager.setAdapter(nflViewPagerAdapter);
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(final TabLayout.Tab tab) {
-
-                viewPager.setCurrentItem(tab.getPosition());
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });*/
 
         welcomeMessage = (TextView) findViewById(R.id.welcome_message);
 
@@ -133,24 +120,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    /*SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-    Set<String> favoriteSportsSelected = sharedPreferences.getStringSet("selected_favorite_sports", null);
-
-    String[] sportsSelected = favoriteSportsSelected.toArray(new String[] {});
-
-            for (String sport : sportsSelected) {
-
-        if (sport.equals("NFL") && sport.equals("NBA") && sport.equals("MLB")) {
-
-            navigationView.getMenu().getItem(R.id.NFL).setVisible(true);
-            navigationView.getMenu().getItem(R.id.NBA).setVisible(false);
-            navigationView.getMenu().getItem(R.id.MLB).setVisible(true);
-
-        }
-
-    }*/
-
+    /**
+     *
+     * @see #onBackPressed()
+     *
+     */
     @Override
     public void onBackPressed() {
 
@@ -166,6 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     *
+     * @see #onCreateOptionsMenu(Menu)
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -175,6 +156,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     *
+     * @see #onOptionsItemSelected(MenuItem)
+     *
+     * @param menuItem
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
 
@@ -193,6 +181,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     *
+     * @see #onSaveInstanceState(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
@@ -201,6 +195,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     *
+     * @see #onRestoreInstanceState(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -209,6 +209,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    /**
+     *
+     * @see #onNavigationItemSelected(MenuItem)
+     *
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -375,182 +382,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 welcomeMessage.setText("");
 
                 return true;
-
-            /*case R.id.NFL_STANDINGS:
-
-                getSupportActionBar().setTitle(R.string.nfl_standings);
-
-                NflDivisionStandingsFragment nflDivisionStandingsFragment = new NflDivisionStandingsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nflDivisionStandingsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nflDivisionStandingsFragment).commit();
-
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.NBA_NEWS:
-
-                getSupportActionBar().setTitle(R.string.nba_sports_news);
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.NBA_TEAMS:
-
-                getSupportActionBar().setTitle(R.string.nba_teams);
-
-                NbaTeamsFragment nbaTeamsFragment = new NbaTeamsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nbaTeamsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaTeamsFragment).commit();
-
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.NBA_STATS:
-
-                getSupportActionBar().setTitle(R.string.nba_stats);
-
-                NbaPlayerStatsFragment nbaPlayerStatsFragment = new NbaPlayerStatsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nbaPlayerStatsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaPlayerStatsFragment).commit();
-
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.NBA_STANDINGS:
-
-                getSupportActionBar().setTitle(R.string.nba_standings);
-
-                NbaDivisionStandingsFragment nbaDivisionStandingsFragment = new NbaDivisionStandingsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, nbaDivisionStandingsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, nbaDivisionStandingsFragment).commit();
-
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.MLB_NEWS:
-
-                getSupportActionBar().setTitle(R.string.mlb_sports_news);
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.MLB_TEAMS:
-
-                getSupportActionBar().setTitle(R.string.mlb_teams);
-
-                MlbTeamsFragment mlbTeamsFragment = new MlbTeamsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mlbTeamsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbTeamsFragment).commit();
-
-                }
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.MLB_STATS:
-
-                getSupportActionBar().setTitle(R.string.mlb_stats);
-
-                MlbPlayerStatsFragment mlbPlayerStatsFragment = new MlbPlayerStatsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mlbPlayerStatsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbPlayerStatsFragment).commit();
-
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-            case R.id.MLB_STANDINGS:
-
-                getSupportActionBar().setTitle(R.string.mlb_standings);
-
-                MlbDivisionStandingsFragment mlbDivisionStandingsFragment = new MlbDivisionStandingsFragment();
-
-                if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null) {
-
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mlbDivisionStandingsFragment).commit();
-
-                } else {
-
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mlbDivisionStandingsFragment).commit();
-
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
-                welcomeMessage.setText("");
-
-                return true;
-
-                */
-
 
         }
 

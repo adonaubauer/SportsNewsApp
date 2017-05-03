@@ -6,13 +6,23 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.ListFragment;
 
 /**
- * Created by Austin on 4/7/2017.
+ * The NflViewPagerAdapter class will create new instances of
+ * the nfl fragments
+ *
+ * @see FragmentStatePagerAdapter
  */
 
 public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int numberOfTabs;
 
+    /**
+     *
+     * The NflViewPagerAdapter constructor will set the number of tabs
+     *
+     * @param fragmentManager
+     * @param numberOfTabs
+     */
     public NflViewPagerAdapter(FragmentManager fragmentManager, int numberOfTabs) {
         super(fragmentManager);
 
@@ -20,8 +30,13 @@ public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-
-
+    /**
+     *
+     * @see #getItem(int)
+     *
+     * @param position
+     * @return
+     */
     @Override
     public Fragment getItem(int position) {
 
@@ -48,6 +63,12 @@ public class NflViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
+    /**
+     *
+     * @see #getCount()
+     *
+     * @return
+     */
     @Override
     public int getCount() {
 

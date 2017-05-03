@@ -5,13 +5,25 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by Austin on 4/7/2017.
+ * MlbViewPagerAdapter is a class that will get each mlbfragments when the tabs are
+ * clicked in the mainactivty
+ *
+ * @see FragmentStatePagerAdapter
+ *
  */
 
 public class MlbViewPagerAdapter extends FragmentStatePagerAdapter {
 
     int numberOfTabs;
 
+    /**
+     *
+     * MlbViewPagerAdapter constructor will set the number of tabs
+     *
+     *
+     * @param fragmentManager
+     * @param numberOfTabs
+     */
     public MlbViewPagerAdapter(FragmentManager fragmentManager, int numberOfTabs) {
         super(fragmentManager);
 
@@ -19,8 +31,13 @@ public class MlbViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-
-
+    /**
+     *
+     * @see #getItem(int)
+     *
+     * @param position
+     * @return
+     */
     @Override
     public Fragment getItem(int position) {
 
@@ -47,6 +64,12 @@ public class MlbViewPagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
+    /**
+     *
+     * @see #getCount()
+     *
+     * @return
+     */
     @Override
     public int getCount() {
 

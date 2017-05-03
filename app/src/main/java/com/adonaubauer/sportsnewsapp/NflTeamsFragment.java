@@ -9,13 +9,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
- * Created by Austin on 3/15/2017.
+ * The NflTeamsFragment will create a list of nfl teams
+ *
+ * @see ListFragment
+ *
  */
 
 public class NflTeamsFragment extends ListFragment {
 
     int mNum;
 
+    /**
+     *
+     * The newInstance method will create new NflTeamsFragment onjects and
+     * return them with arguments
+     *
+     * @param num
+     * @return
+     */
     static NflTeamsFragment newInstance(int num) {
 
         NflTeamsFragment nflTeamsFragment = new NflTeamsFragment();
@@ -30,6 +41,12 @@ public class NflTeamsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +59,15 @@ public class NflTeamsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * @see #onListItemClick(ListView, View, int, long)
+     *
+     * @param l
+     * @param v
+     * @param position
+     * @param id
+     */
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);

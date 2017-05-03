@@ -16,7 +16,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Austin on 3/21/2017.
+ * The NbaPlayerStatsFragment will create a list of player stats
+ *
+ * @see ListFragment
+ *
  */
 
 public class NbaPlayerStatsFragment extends ListFragment {
@@ -25,12 +28,23 @@ public class NbaPlayerStatsFragment extends ListFragment {
 
     String url = "https://www.mysportsfeeds.com/api/feed/pull/nba/2015-2016-regular/cumulative_player_stats.xml";
 
+    /**
+     *
+     * The NbaPlayerStatsFragment constructor will create a new ArrayList of strings
+     *
+     */
     public NbaPlayerStatsFragment() {
 
         nbaPlayerStats = new ArrayList<>();
 
     }
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +55,31 @@ public class NbaPlayerStatsFragment extends ListFragment {
 
     }
 
+    /**
+     *
+     * The AsyncTaskNbaPlayerStats class will send a request to the api
+     *
+     */
     private class AsyncTaskNbaPlayerStats extends AsyncTask<String, Void, ArrayList<String>> {
 
         HttpURLConnection httpURLConnection;
 
+        /**
+         *
+         * @see #onPreExecute()
+         *
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         *
+         * @see #onPostExecute(ArrayList)
+         *
+         * @param strings
+         */
         @Override
         protected void onPostExecute(ArrayList<String> strings) {
 
@@ -61,11 +91,26 @@ public class NbaPlayerStatsFragment extends ListFragment {
             super.onPostExecute(strings);
         }
 
+        /**
+         *
+         * @see #doInBackground(String...)
+         *
+         * @param params
+         * @return
+         */
         @Override
         protected ArrayList<String> doInBackground(String... params) {
             return sendRequest(params[0]);
         }
 
+        /**
+         *
+         * The sendRequest method will get the api url and send the request and
+         * return an ArrayList of strings
+         *
+         * @param apiUrl
+         * @return
+         */
         private ArrayList<String> sendRequest(String apiUrl) {
 
             try {

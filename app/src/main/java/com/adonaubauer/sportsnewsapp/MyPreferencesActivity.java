@@ -4,11 +4,20 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 /**
- * Created by Austin on 3/7/2017.
+ * MyPreferencesActivity will get the preference fragment
+ *
+ * @see PreferenceActivity
+ *
  */
 
 public class MyPreferencesActivity extends PreferenceActivity {
 
+    /**
+     *
+     * @see #onCreate(Bundle)
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
