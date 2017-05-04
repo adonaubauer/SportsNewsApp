@@ -37,6 +37,11 @@
     <string name="confirm_password">Confirm Password:</string>
     <string name="submit">Submit</string>
     <string name="cancel">Cancel</string>
+    <string name="cancel_signup">Cancel Signup</string>
+    <string name="back">Back</string>
+    <string name="edit_favorites">Edit Favorites</string>
+    <string name="edit_profile">edit_profile</string>
+    <string name="remember_login_info">Remember Login Info</string>
 
     <string-array name="sports_names_array">
 

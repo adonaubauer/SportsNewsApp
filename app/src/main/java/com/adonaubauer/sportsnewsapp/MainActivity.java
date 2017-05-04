@@ -168,10 +168,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()) {
 
-            case R.id.action_settings:
+            case R.id.edit_favorites:
 
                 Intent userPreferencesIntent = new Intent(this, MyPreferencesActivity.class);
                 startActivity(userPreferencesIntent);
+
+                return true;
+
+            case R.id.edit_profile:
 
                 return true;
 

@@ -1,5 +1,6 @@
 package com.adonaubauer.sportsnewsapp;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -80,21 +81,39 @@ public class SignupActivity extends AppCompatActivity {
 
                     edittextUsername.setError("PLEASE ENTER A USERNAME");
 
-                } else if (edittextPassword.getText().toString().isEmpty()) {
+                    return;
+
+                }
+
+                if (edittextPassword.getText().toString().isEmpty()) {
 
                     edittextPassword.setError("PLEASE ENTER A PASSWORD");
 
-                } else if (edittextPassword.getText().toString().equals(edittextConfirmPassword.getText().toString())) {
+                    return;
+
+                }
+
+                if (!edittextPassword.getText().toString().equals(edittextConfirmPassword.getText().toString())) {
 
                     edittextConfirmPassword.setError("CONFIRM PASSWORD DOESN'T MATCH PASSWORD");
+
+                    return;
 
                 } else {
 
                     newUser(v);
 
-                    Intent userSignupSuccessIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    if (findUser() != null) {
 
-                    startActivity(userSignupSuccessIntent);
+                        Toast.makeText(getApplicationContext(), "SIGNUP WAS SUCCESSFULL", Toast.LENGTH_LONG).show();
+
+                        finish();
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "SIGNUP WAS UNSUCCESFULL", Toast.LENGTH_LONG).show();
+
+                    }
 
                 }
 
@@ -117,31 +136,39 @@ public class SignupActivity extends AppCompatActivity {
 
                 //Toast.makeText(getApplicationContext(), "CANCEL SIGNUP", Toast.LENGTH_LONG).show();
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                final Dialog dialog = new Dialog(getApplicationContext());
 
-                builder.setMessage("CANCEL SIGNUP");
+                dialog.setContentView(R.layout.cancel_login_dialog_box);
 
-                builder.setPositiveButton("YES CANCEL SIGNUP", new DialogInterface.OnClickListener() {
+                dialog.setTitle("Cancel Signup");
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                Button btnCancelSignup = (Button) findViewById(R.id.btnCancelSignupDialog);
 
-                        onBackPressed();
+                Button btnBack         = (Button) findViewById(R.id.btnBack);
 
-                    }
-
-                });
-
-                builder.setNegativeButton("NO CLOSE DIALOG BOX", new DialogInterface.OnClickListener() {
+                btnCancelSignup.setOnClickListener(new View.OnClickListener() {
 
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
 
                         finish();
 
                     }
 
                 });
+
+                btnBack.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                        dialog.dismiss();
+
+                    }
+
+                });
+
+                dialog.show();
 
             }
 
@@ -162,6 +189,22 @@ public class SignupActivity extends AppCompatActivity {
         User user = new User(id, username, password);
 
         myRegistrationDatabaseHandler.addUser(user);
+
+    }
+
+    public User findUser() {
+
+        MyRegistrationDatabaseHandler myRegistrationDatabaseHandler = new MyRegistrationDatabaseHandler(getApplicationContext(), null, null, 1);
+
+        User foundUser = myRegistrationDatabaseHandler.findUser(edittextUsername.getText().toString(), edittextPassword.getText().toString());
+
+        if (foundUser != null) {
+
+            return foundUser;
+
+        }
+
+        return null;
 
     }
 

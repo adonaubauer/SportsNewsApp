@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ public class LoginMainActivity extends AppCompatActivity {
     EditText edittextPassword;
     Button   buttonSignin;
     Button   buttonSignup;
+
+    CheckBox rememberLoginInfo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class LoginMainActivity extends AppCompatActivity {
 
         buttonSignup     = (Button)   findViewById(R.id.btnSignup);
 
+        rememberLoginInfo = (CheckBox) findViewById(R.id.checkboxRememberLoginInfo);
+
     }
 
     public void setupToolbar() {
@@ -71,7 +76,47 @@ public class LoginMainActivity extends AppCompatActivity {
                 //TODO If user is signup and username and password are correct, send them to main activity
                 //TODO If user is not signedup and username and password are incorrect, Toast/Snackbar/Dialog box message that the user should signup first before trying to sign in
 
-                Toast.makeText(getApplicationContext(), "PLEASE SIGNUP FIRST BEFORE TRYING TO SIGN IN", Toast.LENGTH_LONG).show();
+                if (edittextUsername.getText().toString().isEmpty()) {
+
+                    edittextUsername.setError("PLEASE ENTER YOUR USERNAME");
+
+                }
+
+                if (edittextPassword.getText().toString().isEmpty()) {
+
+                    edittextPassword.setError("PLEASE ENTER YOUR PASSWORD");
+
+                }
+
+                User user;
+
+                MyRegistrationDatabaseHandler myRegistrationDatabaseHandler = new MyRegistrationDatabaseHandler(getApplicationContext(), null, null, 1);
+
+                user = myRegistrationDatabaseHandler.findUser(edittextUsername.getText().toString(), edittextPassword.getText().toString());
+
+                if (user != null) {
+
+                    Intent startSportsNewsAppMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+
+                    if (rememberLoginInfo.isChecked()) {
+
+                        startSportsNewsAppMainActivity.putExtra("username", user.getUsername());
+
+                        startSportsNewsAppMainActivity.putExtra("password", user.getPassword());
+
+                        startActivity(startSportsNewsAppMainActivity);
+
+                    } else {
+
+                        startActivity(startSportsNewsAppMainActivity);
+
+                    }
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Sign in was unsuccessfull, try re-entering user info or click signup button to get started", Toast.LENGTH_LONG).show();
+
+                }
 
             }
 
